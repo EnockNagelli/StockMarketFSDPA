@@ -3,7 +3,9 @@ package com.iiht.StockMarket.model;
 import java.io.Serializable;
 import java.util.Set;
 
+import javax.persistence.Id;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -22,18 +24,18 @@ public class CompanyDetails implements Serializable {
 
 	private static final long serialVersionUID = 531050392622113165L;
 
-	@javax.persistence.Id
-	private Long Id;
+	@Id
+	@Column(name = "companyCode")
+	private Long companyCode;
 	
 	private String stockExchange;
-	private Long companyCode;
 	private String companyName;
 	private String companyCEO;
 	private Double turnover;
 	private String boardOfDirectors;
-	private String companyProfile;								// Brief writeup, about companies Services/Product, etc…
+	private String companyProfile;								// Brief writeup, about companies Services/Product, etcâ€¦
 	
-	@OneToMany(cascade= {CascadeType.MERGE})
+	@OneToMany(cascade={CascadeType.MERGE})
 	@JoinColumn(name="companyCode")
 	private Set<StockPriceDetails> StockPriceDetails;	
 }

@@ -21,9 +21,8 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 
 		CompanyDetails newCompany = new CompanyDetails();
 		
-		newCompany.setId(companyDetailsDTO.getId());
-		newCompany.setStockExchange(companyDetailsDTO.getStockExchange());
 		newCompany.setCompanyCode(companyDetailsDTO.getCompanyCode());
+		newCompany.setStockExchange(companyDetailsDTO.getStockExchange());
 		newCompany.setCompanyName(companyDetailsDTO.getCompanyName());
 		newCompany.setCompanyCEO(companyDetailsDTO.getCompanyCEO());
 		newCompany.setTurnover(companyDetailsDTO.getTurnover());
@@ -35,8 +34,11 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 	};
 	//----------------------------------------------------------------------------
 	public Boolean deleteCompany(Long companyCode) {
-		repository.deleteById(companyCode);
-		return true;
+		Integer value = repository.deleteByCompanyCode(companyCode);
+		if(value != null)
+			return true;
+		else
+			return false;
 	};
 	//----------------------------------------------------------------------------
 	public CompanyDetailsDTO getCompanyInfoByCode(Long companyCode) {
@@ -58,6 +60,6 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 	};
 	//----------------------------------------------------------------------------
 	public CompanyDetailsDTO getCompanyDetailsDTO(CompanyDetails companyInfo)	{
-		return new CompanyDetailsDTO(companyInfo.getId(), companyInfo.getStockExchange(), companyInfo.getCompanyCode(), companyInfo.getCompanyName(), companyInfo.getCompanyCEO(), companyInfo.getTurnover(), companyInfo.getBoardOfDirectors(), companyInfo.getCompanyProfile());
+		return new CompanyDetailsDTO(companyInfo.getCompanyCode(), companyInfo.getStockExchange(), companyInfo.getCompanyName(), companyInfo.getCompanyCEO(), companyInfo.getTurnover(), companyInfo.getBoardOfDirectors(), companyInfo.getCompanyProfile());
 	};
 }

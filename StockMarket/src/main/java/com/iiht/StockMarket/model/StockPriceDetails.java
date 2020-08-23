@@ -1,9 +1,11 @@
 package com.iiht.StockMarket.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -20,12 +22,13 @@ public class StockPriceDetails implements Serializable {
 	private static final long serialVersionUID = 3721936374836041464L;
 
 	@javax.persistence.Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long Id;
 	
+	private String stockExchange;								// Name of the Stock Exchange company registered
 	private Long companyCode;									// To which Company this Stock Price Info belongs to
-	private String stockExchange;
-	private String companyName;
-	private Double currentStockPrice;							// Stock Price
-	private LocalDate stockPriceDate;							// Date of the Stock Price
-	private String stockPriceTime;		
+	private String companyName;									// Name of the company - for which Stock Price registered
+	private Double currentStockPrice;							// Stock Price of the company
+	private Date stockPriceDate;								// Date of the Stock Price registered
+	private String stockPriceTime;								// Time of the Stock Price registered
 }

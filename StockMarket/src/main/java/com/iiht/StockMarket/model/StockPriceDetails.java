@@ -1,7 +1,8 @@
 package com.iiht.StockMarket.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,6 +30,6 @@ public class StockPriceDetails implements Serializable {
 	private Long companyCode;									// To which Company this Stock Price Info belongs to
 	private String companyName;									// Name of the company - for which Stock Price registered
 	private Double currentStockPrice;							// Stock Price of the company
-	private Date stockPriceDate;								// Date of the Stock Price registered
-	private String stockPriceTime;								// Time of the Stock Price registered
+	private LocalDate stockPriceDate;							// Date of the Stock Price registered
+	private LocalTime stockPriceTime;							// Time of the Stock Price registered
 }

@@ -1,8 +1,9 @@
 package com.iiht.StockMarket.services;
 
-import java.sql.Date;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,6 @@ public class StockMarketServiceImpl implements StockMarketService {
 		newStock.setStockPriceTime(stockPriceDetailsDTO.getStockPriceTime());
 		
 		repository.save(newStock);
-		
 		return Boolean.TRUE;
 	};
 	//----------------------------------------------------------------------------
@@ -70,17 +70,17 @@ public class StockMarketServiceImpl implements StockMarketService {
 		return new StockPriceDetailsDTO(stockDetails.getId(), stockDetails.getStockExchange(), stockDetails.getCompanyCode(), stockDetails.getCompanyName(), stockDetails.getCurrentStockPrice(), stockDetails.getStockPriceDate(), stockDetails.getStockPriceTime());
 	};	
 	//----------------------------------------------------------------------------
-	public Double getMaxStockPrice(Long companyCode, Date startDate, Date endDate) {
+	public Double getMaxStockPrice(Long companyCode, LocalDate startDate, LocalDate endDate) {
 		return repository.findMaxStockPrice(companyCode, startDate, endDate);
 	};
-	public Double getAvgStockPrice(Long companyCode, Date startDate, Date endDate) {
+	public Double getAvgStockPrice(Long companyCode, LocalDate startDate, LocalDate endDate) {
 		return repository.findAvgStockPrice(companyCode, startDate, endDate);
 	};
-	public Double getMinStockPrice(Long companyCode, Date startDate, Date endDate) {
+	public Double getMinStockPrice(Long companyCode, LocalDate startDate, LocalDate endDate) {
 		return repository.findMinStockPrice(companyCode, startDate, endDate);
 	};
 	
-	public List<Object> getStockPriceIndex(Long companyCode, Date startDate, Date endDate) {
+	public Map<String, Object> getStockPriceIndex(Long companyCode, LocalDate startDate, LocalDate endDate) {
 		
 		Double maxStockPrice = getMaxStockPrice(companyCode, startDate, endDate);
 		Double avgStockPrice = getAvgStockPrice(companyCode, startDate, endDate);
@@ -88,21 +88,30 @@ public class StockMarketServiceImpl implements StockMarketService {
 		
 		List<StockPriceDetailsDTO> stockList = getStockByCode(companyCode);
 
-		Double currentStockPrice = stockList.get(stockList.size()-1).getCurrentStockPrice();
 		String stockExchange = stockList.get(stockList.size()-1).getStockExchange();
 		String companyName = stockList.get(stockList.size()-1).getCompanyName();
+		Double currentStockPrice = stockList.get(stockList.size()-1).getCurrentStockPrice();
 		
-		List<Object> stockPriceIndex = new ArrayList<Object>();
+		/*
+		 * List<Object> stockPriceIndex = new ArrayList<Object>();
+		 * 
+		 * stockPriceIndex.add(stockExchange); stockPriceIndex.add(companyName);
+		 * stockPriceIndex.add(companyCode); stockPriceIndex.add(startDate);
+		 * stockPriceIndex.add(endDate); stockPriceIndex.add(currentStockPrice);
+		 * stockPriceIndex.add(minStockPrice); stockPriceIndex.add(avgStockPrice);
+		 * stockPriceIndex.add(maxStockPrice);
+		 */
+		Map<String, Object> stockPriceIndex = new HashMap<String, Object>();
 		
-		stockPriceIndex.add(stockExchange);
-		stockPriceIndex.add(companyName);
-		stockPriceIndex.add(companyCode);
-		stockPriceIndex.add(startDate);
-		stockPriceIndex.add(endDate);
-		stockPriceIndex.add(currentStockPrice);
-		stockPriceIndex.add(minStockPrice);
-		stockPriceIndex.add(avgStockPrice);
-		stockPriceIndex.add(maxStockPrice);
+		stockPriceIndex.put("Stock Exchange ", stockExchange);
+		stockPriceIndex.put("Company Name ", companyName);
+		stockPriceIndex.put("Company Code ", companyCode);
+		stockPriceIndex.put("From Date ", startDate);
+		stockPriceIndex.put("To Date ", endDate);
+		stockPriceIndex.put("Current Stock Price ", currentStockPrice);
+		stockPriceIndex.put("Minimum Stock Price ", minStockPrice);
+		stockPriceIndex.put("Average Stock Price ", avgStockPrice);
+		stockPriceIndex.put("Maximum Stock Price ", maxStockPrice);
 		
 		return stockPriceIndex;
 	};

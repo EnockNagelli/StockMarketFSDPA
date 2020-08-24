@@ -1,6 +1,7 @@
 package com.iiht.StockMarket.dto;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Temporal;
@@ -34,7 +35,8 @@ public class StockPriceDetailsDTO {
 	
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date stockPriceDate;							// Date of the Stock Price
+	private LocalDate stockPriceDate;							// Date of the Stock Price
 	
-	private String stockPriceTime;								// Stock Price at this Specific	
+	@Column(columnDefinition = "TIME")
+	private LocalTime stockPriceTime;							// Stock Price at this Specific	
 }

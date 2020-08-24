@@ -1,7 +1,6 @@
 package com.iiht.StockMarket.controller;
 
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iiht.StockMarket.dto.StockPriceDetailsDTO;
-import com.iiht.StockMarket.model.LocalDateAttributeConverter;
 import com.iiht.StockMarket.services.StockMarketService;
 
 @RestController
@@ -63,8 +61,6 @@ public class StockPriceController {
 	//-------------------------------------------------------------------------------------------------------------------------------
 	@GetMapping(value = "/stock/getStockPriceIndex/{companyCode}/{startDate}/{endDate}")								// 6. WORKING
 	public ResponseEntity<Map<String, Object>> displayStockPriceIndex(@PathVariable Long companyCode, @PathVariable Date startDate, @PathVariable Date endDate) {
-		LocalDate fromDate = new LocalDateAttributeConverter().convertToEntityAttribute(startDate);
-		LocalDate toDate = new LocalDateAttributeConverter().convertToEntityAttribute(endDate);		
-		return new ResponseEntity<Map<String, Object>>(stockMarketService.getStockPriceIndex(companyCode, fromDate, toDate), HttpStatus.OK);
+		return new ResponseEntity<Map<String, Object>>(stockMarketService.getStockPriceIndex(companyCode, startDate.toLocalDate(), endDate.toLocalDate()), HttpStatus.OK);
 	}
 }

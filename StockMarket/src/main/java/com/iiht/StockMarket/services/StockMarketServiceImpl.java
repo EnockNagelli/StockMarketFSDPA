@@ -1,9 +1,9 @@
 package com.iiht.StockMarket.services;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,26 +92,17 @@ public class StockMarketServiceImpl implements StockMarketService {
 		String companyName = stockList.get(stockList.size()-1).getCompanyName();
 		Double currentStockPrice = stockList.get(stockList.size()-1).getCurrentStockPrice();
 		
-		/*
-		 * List<Object> stockPriceIndex = new ArrayList<Object>();
-		 * 
-		 * stockPriceIndex.add(stockExchange); stockPriceIndex.add(companyName);
-		 * stockPriceIndex.add(companyCode); stockPriceIndex.add(startDate);
-		 * stockPriceIndex.add(endDate); stockPriceIndex.add(currentStockPrice);
-		 * stockPriceIndex.add(minStockPrice); stockPriceIndex.add(avgStockPrice);
-		 * stockPriceIndex.add(maxStockPrice);
-		 */
-		Map<String, Object> stockPriceIndex = new HashMap<String, Object>();
+		Map<String, Object> stockPriceIndex = new TreeMap<String, Object>();
 		
-		stockPriceIndex.put("Stock Exchange ", stockExchange);
-		stockPriceIndex.put("Company Name ", companyName);
-		stockPriceIndex.put("Company Code ", companyCode);
-		stockPriceIndex.put("From Date ", startDate);
-		stockPriceIndex.put("To Date ", endDate);
-		stockPriceIndex.put("Current Stock Price ", currentStockPrice);
-		stockPriceIndex.put("Minimum Stock Price ", minStockPrice);
-		stockPriceIndex.put("Average Stock Price ", avgStockPrice);
-		stockPriceIndex.put("Maximum Stock Price ", maxStockPrice);
+		stockPriceIndex.put("1. Stock Exchange ", stockExchange);
+		stockPriceIndex.put("2. Company Name ", companyName);
+		stockPriceIndex.put("3. Company Code ", companyCode);
+		stockPriceIndex.put("4. Current Stock Price ", currentStockPrice);
+		stockPriceIndex.put("5. From Date ", startDate);
+		stockPriceIndex.put("6. To Date ", endDate);
+		stockPriceIndex.put("7. Minimum Stock Price ", minStockPrice);
+		stockPriceIndex.put("8. Average Stock Price ", avgStockPrice);
+		stockPriceIndex.put("9. Maximum Stock Price ", maxStockPrice);
 		
 		return stockPriceIndex;
 	};

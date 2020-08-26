@@ -26,10 +26,10 @@ public class CompanyDetails implements Serializable {
 
 	@Id
 	@Column(name = "companyCode")
-	private Long companyCode;
+	private Long companyCode;									// To which Company this Stock Price Info belongs to
 	
-	private String stockExchange;
-	private String companyName;
+	private String stockExchange;								// Name of the Stock Exchange company registered
+	private String companyName;									// Name of the company - for which Stock Price registered
 	private String companyCEO;
 	private Double turnover;
 	private String boardOfDirectors;

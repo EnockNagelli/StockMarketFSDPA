@@ -26,9 +26,7 @@ public class StockPriceDetails implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long Id;
 	
-	private String stockExchange;								// Name of the Stock Exchange company registered
 	private Long companyCode;									// To which Company this Stock Price Info belongs to
-	private String companyName;									// Name of the company - for which Stock Price registered
 	private Double currentStockPrice;							// Stock Price of the company
 	private LocalDate stockPriceDate;							// Date of the Stock Price registered
 	private LocalTime stockPriceTime;							// Time of the Stock Price registered

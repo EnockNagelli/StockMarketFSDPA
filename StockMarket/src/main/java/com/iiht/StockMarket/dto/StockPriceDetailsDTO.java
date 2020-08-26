@@ -21,14 +21,8 @@ public class StockPriceDetailsDTO {
 	
 	private Long Id;
 	
-	@Size(min = 1, max = 100)
-	private String stockExchange;
-
 	@Size(min = 1, max = 10)
 	private Long companyCode;									// To which Company this Stock Price Info belongs to
-
-	@Size(min = 1, max = 100)
-	private String companyName;
 
 	@Column(precision=10, scale=2)
 	private Double currentStockPrice;							// Stock Price

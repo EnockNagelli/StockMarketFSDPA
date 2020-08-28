@@ -33,8 +33,20 @@ public class CompanyDetails implements Serializable {
 	private String companyCEO;
 	private Double turnover;
 	private String boardOfDirectors;
-	private String companyProfile;								// Brief writeup, about companies Services/Product, etcâ€¦
+	private String companyProfile;								// Brief writeup, about companies Services/Product, etc
 	
+	public CompanyDetails(Long companyCode, String stockExchange, String companyName, String companyCEO,
+			Double turnover, String boardOfDirectors, String companyProfile) {
+		super();
+		this.companyCode = companyCode;
+		this.stockExchange = stockExchange;
+		this.companyName = companyName;
+		this.companyCEO = companyCEO;
+		this.turnover = turnover;
+		this.boardOfDirectors = boardOfDirectors;
+		this.companyProfile = companyProfile;
+	}
+
 	@OneToMany(cascade={CascadeType.MERGE})
 	@JoinColumn(name="companyCode")
 	private Set<StockPriceDetails> StockPriceDetails;	

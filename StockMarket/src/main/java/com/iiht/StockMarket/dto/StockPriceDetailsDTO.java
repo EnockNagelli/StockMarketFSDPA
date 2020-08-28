@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -21,16 +22,20 @@ public class StockPriceDetailsDTO {
 	
 	private Long Id;
 	
+	@NotNull
 	@Size(min = 1, max = 10)
 	private Long companyCode;									// To which Company this Stock Price Info belongs to
 
+	@NotNull
 	@Column(precision=10, scale=2)
 	private Double currentStockPrice;							// Stock Price
 	
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private LocalDate stockPriceDate;							// Date of the Stock Price
 	
+	@NotNull
 	@Column(columnDefinition = "TIME")
 	private LocalTime stockPriceTime;							// Stock Price at this Specific	
 }

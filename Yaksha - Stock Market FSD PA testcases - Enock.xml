@@ -1,0 +1,330 @@
+<test-cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testCompanyCodeTitleLength</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify the length of the field 'CompanyCode'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testStockExchangeLength</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify the length of the field 'StockExchange'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testCompanyNameLength</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify the length of the field 'CompanyName'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testCompanyCEOLength</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify the length of the field 'CompanyCEO'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testTurnoverLength</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify the length of the field 'Turnover'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testBoardOfDirectorsLength</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify the length of the field 'BoardOfDirectors'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testCompanyProfileLength</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify the length of the field 'CompanyProfile'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testPostCompanyDetailsSuccess</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify Successful addition of 'CompanyDetails'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testPostCompanyDetailsFailed</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify failure of 'CompanyDetails' addition operation</desc>
+	</cases>
+	<!-- --------------------------------------------------------------------------- -->
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testCurrentStockPriceLength</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify the length of the field 'CurrentStockPrice'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testStockPriceDateLength</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify the length of the field 'StockPriceDate'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testStockPriceTimeLength</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify the length of the field 'StockPriceTime'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testPostStockPriceDetailsSuccess</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify Successful addition of 'StockPriceDetails'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Boundary</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testPostStockPriceDetailsFailed</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>Test case to verify failure of 'StockPriceDetails' addition operation</desc>
+	</cases>
+	<!-- --------------------------------------------------------------------------- -->
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Exception</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testCompanyForExceptionUponAddingNewCompany</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To test 'addCompany' rest end point for 'InvalidCompanyException' upon adding New CompanyDetails</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Exception</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testCompanyForExceptionUponAddingCompanyWithNullValue</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To test 'addCompany' rest end point for 'InvalidCompanyException' upon adding 'null' value in place of 'CompanyDetails'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Exception</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testCompanyForExceptionUponFetchingCompanyInfoByNullValue</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To test 'getCompanyInfoById' rest end point for 'CompanyNotFoundException' upon fetching 'CompanyDetails' by passing 'null' value in place of 'CompanyCode'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Exception</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testCompanyForExceptionUponDeletingCompanyByNullValue</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To test 'deleteCompany' rest end point for 'CompanyNotFoundException' upon deleting by passing null value</desc>
+	</cases>
+	<!-- --------------------------------------------------------------------------- -->
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Exception</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testStockForExceptionUponAddingNewStock</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To test 'addStock' rest end point for 'InvalidStockException' upon adding New 'StockPriceDetails'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Exception</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testStockForExceptionUponAddingStockWithNullValue</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To test 'addStock' rest end point for 'InvalidStockException' upon adding any 'StockPriceDetails' with null values</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Exception</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testStockForExceptionUponFetchingStockDetailsByNullValue</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To test 'getStockByCompanyCode' rest end point for 'StockNotFoundException' upon fetching 'StockPriceDetails' by passing 'null' value in place of 'CompanyCode'</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Exception</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testStockForExceptionUponDeletingStockByNullValue</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To test 'deleteStock' rest end point for 'StockNotFoundException' upon deleting by passing null value</desc>
+	</cases>
+
+	<!-- --------------------------------------------------------------------------- -->
+	<!-- Functional Testcases - Test Controller
+	<!-- --------------------------------------------------------------------------- -->
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testAddCompany</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional test upon 'saveCompanyDetails' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testAddCompanyBDD</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional BDD test upon 'saveCompanyDetails' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testDeleteCompany</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional test upon 'deleteCompany' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testDeleteCompanyBDD</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional BDD test upon 'deleteCompany' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testFindCompanyInfoById</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional test upon 'getCompanyInfoById' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testFindCompanyInfoByIdBDD</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional BDD test upon 'getCompanyInfoById' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testFindAllCompanies</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional test upon 'getAllCompanies' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testFindAllCompaniesBDD</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional BDD test upon 'getCompanyInfoById' rest end point</desc>
+	</cases>
+	<!-- -------------------------------------------------------------------------- -->
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testAddStock</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional test upon 'addStock' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testAddStockBDD</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional BDD test upon 'addStock' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testDeleteStock</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional test upon 'deleteStock' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testDeleteStockBDD</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional BDD test upon 'deleteStock' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testFindStockByCompanyCode</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional test upon 'getStockByCompanyCode' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testFindStockByCompanyCodeBDD</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional BDD test upon 'getStockByCompanyCode' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testFindAllStock</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional test upon 'getAllStock' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testFindAllStockBDD</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional BDD test upon 'getAllStock' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testStockPriceIndex</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional test upon 'getStockPriceIndex' rest end point</desc>
+	</cases>
+	<cases xmlns:java="http://java.sun.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="java:com.assessment.data.TestCase">
+		<test-case-type>Functional</test-case-type>
+		<expected-ouput>true</expected-ouput>
+		<name>testStockPriceIndexBDD</name>
+		<weight>2</weight>
+		<mandatory>true</mandatory>
+		<desc>To perform functional BDD test upon 'getStockPriceIndex' rest end point</desc>
+	</cases>
+</test-cases>

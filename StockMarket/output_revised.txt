@@ -1,5 +1,0 @@
-
-testStockMarketServiceImpl=false
-testViewCurrentStock=true
-testSaveStockMarketServiceImpl=true
-testViewCurrentStockCase=false

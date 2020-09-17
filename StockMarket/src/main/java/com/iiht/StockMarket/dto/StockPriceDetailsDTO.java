@@ -11,31 +11,74 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class StockPriceDetailsDTO {
 	
 	private Long Id;
 	
 	@NotNull
 	@Size(min = 1, max = 10)
-	private Long companyCode;									// To which Company this Stock Price Info belongs to
+	private Long companyCode;
 
 	@NotNull
 	@Column(precision=10, scale=2)
-	private Double currentStockPrice;							// Stock Price
+	private Double currentStockPrice;
 	
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern="yyyy-MM-dd")
-	private LocalDate stockPriceDate;							// Date of the Stock Price
+	private LocalDate stockPriceDate;
 	
 	@NotNull
 	@Column(columnDefinition = "TIME")
-	private LocalTime stockPriceTime;							// Stock Price at this Specific	
+	private LocalTime stockPriceTime;	
+
+	//---------------------------------------------------------------------------------------------------------------------------------
+	public StockPriceDetailsDTO() {
+		super();
+	}
+	public StockPriceDetailsDTO(Long id, @NotNull @Size(min = 1, max = 10) Long companyCode,
+			@NotNull Double currentStockPrice, @NotNull LocalDate stockPriceDate, @NotNull LocalTime stockPriceTime) {
+		super();
+		Id = id;
+		this.companyCode = companyCode;
+		this.currentStockPrice = currentStockPrice;
+		this.stockPriceDate = stockPriceDate;
+		this.stockPriceTime = stockPriceTime;
+	}
+
+	//---------------------------------------------------------------------------------------------------------------------------------
+	public Long getId() {
+		return Id;
+	}
+	public void setId(Long id) {
+		Id = id;
+	}
+	//---------------------------------------------------------------------------------------------------------------------------------
+	public Long getCompanyCode() {
+		return companyCode;
+	}
+	public void setCompanyCode(Long companyCode) {
+		this.companyCode = companyCode;
+	}
+	//---------------------------------------------------------------------------------------------------------------------------------
+	public Double getCurrentStockPrice() {
+		return currentStockPrice;
+	}
+	public void setCurrentStockPrice(Double currentStockPrice) {
+		this.currentStockPrice = currentStockPrice;
+	}
+	//---------------------------------------------------------------------------------------------------------------------------------
+	public LocalDate getStockPriceDate() {
+		return stockPriceDate;
+	}
+	public void setStockPriceDate(LocalDate stockPriceDate) {
+		this.stockPriceDate = stockPriceDate;
+	}
+	//---------------------------------------------------------------------------------------------------------------------------------
+	public LocalTime getStockPriceTime() {
+		return stockPriceTime;
+	}
+	public void setStockPriceTime(LocalTime stockPriceTime) {
+		this.stockPriceTime = stockPriceTime;
+	}	
 }

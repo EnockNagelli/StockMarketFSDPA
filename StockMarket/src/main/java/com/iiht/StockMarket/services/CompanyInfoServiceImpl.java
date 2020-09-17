@@ -3,63 +3,59 @@ package com.iiht.StockMarket.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import com.iiht.StockMarket.dto.CompanyDetailsDTO;
+import com.iiht.StockMarket.exception.CompanyNotFoundException;
 import com.iiht.StockMarket.model.CompanyDetails;
 import com.iiht.StockMarket.repository.CompanyInfoRepository;
+import com.iiht.StockMarket.utils.StockMarketUtility;
 
 @Service
+@Transactional
 public class CompanyInfoServiceImpl implements CompanyInfoService {
 	
 	@Autowired
 	private CompanyInfoRepository repository; 
 	
-	public Boolean saveCompanyDetails(CompanyDetailsDTO companyDetailsDTO) {
+	public CompanyDetailsDTO saveCompanyDetails(CompanyDetailsDTO companyDetailsDTO) {
 
-		CompanyDetails newCompany = new CompanyDetails();
+		CompanyDetails newCompany = StockMarketUtility.convertToCompanyDetails(companyDetailsDTO);
 		
-		newCompany.setCompanyCode(companyDetailsDTO.getCompanyCode());
-		newCompany.setStockExchange(companyDetailsDTO.getStockExchange());
-		newCompany.setCompanyName(companyDetailsDTO.getCompanyName());
-		newCompany.setCompanyCEO(companyDetailsDTO.getCompanyCEO());
-		newCompany.setTurnover(companyDetailsDTO.getTurnover());
-		newCompany.setBoardOfDirectors(companyDetailsDTO.getBoardOfDirectors());
-		newCompany.setCompanyProfile(companyDetailsDTO.getCompanyProfile());
-
 		repository.save(newCompany);
-		return Boolean.TRUE;
+		
+		return companyDetailsDTO;
 	};
 	//----------------------------------------------------------------------------
-	public Boolean deleteCompany(Long companyCode) {
+	public CompanyDetailsDTO deleteCompany(Long companyCode) {
+		
 		Integer value = repository.deleteByCompanyCode(companyCode);
+		
 		if(value != null)
-			return true;
+			return getCompanyInfoById(companyCode);
 		else
-			return false;
+			throw new CompanyNotFoundException("No Company Found in the Database...");
 	};
 	//----------------------------------------------------------------------------
-	public CompanyDetailsDTO getCompanyInfoByCode(Long companyCode) {
+	public CompanyDetailsDTO getCompanyInfoById(Long companyCode) {
 		
 		CompanyDetails companyInfo = repository.findCompanyDetailsById(companyCode);
 
-		return getCompanyDetailsDTO(companyInfo);
+		return StockMarketUtility.convertToCompanyDetailsDTO(companyInfo);
 	};
 	
 	//----------------------------------------------------------------------------
 	public List<CompanyDetailsDTO> getAllCompanies() {
-		
+
 		List<CompanyDetails> companyInfo = repository.findAll();
-		
+
 		if(CollectionUtils.isEmpty(companyInfo))
 			return null;
 		else
-			return companyInfo.stream().map(this::getCompanyDetailsDTO).collect(Collectors.toList());
-	};
-	//----------------------------------------------------------------------------
-	public CompanyDetailsDTO getCompanyDetailsDTO(CompanyDetails companyInfo)	{
-		return new CompanyDetailsDTO(companyInfo.getCompanyCode(), companyInfo.getStockExchange(), companyInfo.getCompanyName(), companyInfo.getCompanyCEO(), companyInfo.getTurnover(), companyInfo.getBoardOfDirectors(), companyInfo.getCompanyProfile());
+			return companyInfo.stream().map(StockMarketUtility::convertToCompanyDetailsDTO).collect(Collectors.toList());
 	};
 }

@@ -9,13 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name="StockPriceDetails")
 public class StockPriceDetails implements Serializable {
@@ -25,9 +18,57 @@ public class StockPriceDetails implements Serializable {
 	@javax.persistence.Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long Id;
-	
-	private Long companyCode;									// To which Company this Stock Price Info belongs to
-	private Double currentStockPrice;							// Stock Price of the company
-	private LocalDate stockPriceDate;							// Date of the Stock Price registered
-	private LocalTime stockPriceTime;							// Time of the Stock Price registered
+	private Long companyCode;
+	private Double currentStockPrice;
+	private LocalDate stockPriceDate;
+	private LocalTime stockPriceTime;
+
+	//---------------------------------------------------------------------------------------------------------------------------------
+	public StockPriceDetails() {
+		super();
+	}	
+	public StockPriceDetails(Long id, Long companyCode, Double currentStockPrice, LocalDate stockPriceDate,	LocalTime stockPriceTime) {
+		super();
+		this.Id = id;
+		this.companyCode = companyCode;
+		this.currentStockPrice = currentStockPrice;
+		this.stockPriceDate = stockPriceDate;
+		this.stockPriceTime = stockPriceTime;
+	}
+
+	//---------------------------------------------------------------------------------------------------------------------------------
+	public Long getId() {
+		return Id;
+	}
+	public void setId(Long id) {
+		Id = id;
+	}
+	//---------------------------------------------------------------------------------------------------------------------------------
+	public Long getCompanyCode() {
+		return companyCode;
+	}
+	public void setCompanyCode(Long companyCode) {
+		this.companyCode = companyCode;
+	}
+	//---------------------------------------------------------------------------------------------------------------------------------
+	public Double getCurrentStockPrice() {
+		return currentStockPrice;
+	}
+	public void setCurrentStockPrice(Double currentStockPrice) {
+		this.currentStockPrice = currentStockPrice;
+	}
+	//---------------------------------------------------------------------------------------------------------------------------------
+	public LocalDate getStockPriceDate() {
+		return stockPriceDate;
+	}
+	public void setStockPriceDate(LocalDate stockPriceDate) {
+		this.stockPriceDate = stockPriceDate;
+	}
+	//---------------------------------------------------------------------------------------------------------------------------------
+	public LocalTime getStockPriceTime() {
+		return stockPriceTime;
+	}
+	public void setStockPriceTime(LocalTime stockPriceTime) {
+		this.stockPriceTime = stockPriceTime;
+	}
 }

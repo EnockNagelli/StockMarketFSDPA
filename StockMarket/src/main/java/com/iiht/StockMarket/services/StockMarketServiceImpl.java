@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -13,10 +15,13 @@ import org.springframework.util.CollectionUtils;
 import com.iiht.StockMarket.model.CompanyDetails;
 import com.iiht.StockMarket.model.StockPriceDetails;
 import com.iiht.StockMarket.dto.StockPriceDetailsDTO;
+import com.iiht.StockMarket.exception.StockNotFoundException;
 import com.iiht.StockMarket.repository.CompanyInfoRepository;
 import com.iiht.StockMarket.repository.StockPriceRepository;
+import com.iiht.StockMarket.utils.StockMarketUtility;
 
 @Service
+@Transactional
 public class StockMarketServiceImpl implements StockMarketService {
 
 	@Autowired
@@ -26,28 +31,23 @@ public class StockMarketServiceImpl implements StockMarketService {
     private CompanyInfoRepository companyRepository;
 	
 	//----------------------------------------------------------------------------
-	public Boolean saveStockPriceDetails(StockPriceDetailsDTO stockPriceDetailsDTO) {
+	public StockPriceDetailsDTO saveStockPriceDetails(StockPriceDetailsDTO stockPriceDetailsDTO) {
 		
-		StockPriceDetails newStock = new StockPriceDetails();
+		StockPriceDetails newStock = StockMarketUtility.convertToStockPriceDetails(stockPriceDetailsDTO);
 
-		newStock.setId(stockPriceDetailsDTO.getId());
-		newStock.setCompanyCode(stockPriceDetailsDTO.getCompanyCode());
-		newStock.setCurrentStockPrice(stockPriceDetailsDTO.getCurrentStockPrice());
-		newStock.setStockPriceDate(stockPriceDetailsDTO.getStockPriceDate());
-		newStock.setStockPriceTime(stockPriceDetailsDTO.getStockPriceTime());
-		
 		stockRepository.save(newStock);
-		return Boolean.TRUE;
+		
+		return stockPriceDetailsDTO;
 	};
 	//----------------------------------------------------------------------------
-	public Boolean deleteStock(Long companyCode) {
+	public List<StockPriceDetailsDTO> deleteStock(Long companyCode) {
 		
 		Integer value = stockRepository.deleteStockByCompanyCode(companyCode);
 
 		if(value != null)
-			return Boolean.TRUE;
+			return StockMarketUtility.convertToStockPriceDetailsDtoList(stockRepository.findStockByCompanyCode(companyCode));
 		else
-			return Boolean.FALSE;
+			throw new StockNotFoundException("Invalid Company Code. No Stock available against this company code.");
 	};
 	//----------------------------------------------------------------------------
 	public List<StockPriceDetailsDTO> getAllStockDetails() {
@@ -57,7 +57,7 @@ public class StockMarketServiceImpl implements StockMarketService {
 		if(CollectionUtils.isEmpty(stockDetails))
 			return null;
 		else
-			return stockDetails.stream().map(this::getStockPriceDetailsDTO).collect(Collectors.toList());
+			return stockDetails.stream().map(StockMarketUtility::convertToStockPriceDetailsDTO).collect(Collectors.toList());
 	};
 	//----------------------------------------------------------------------------
 	public List<StockPriceDetailsDTO> getStockByCode(Long companyCode){
@@ -67,7 +67,7 @@ public class StockMarketServiceImpl implements StockMarketService {
 		if(CollectionUtils.isEmpty(stockDetails))
 			return null;
 		else
-			return stockDetails.stream().map(this::getStockPriceDetailsDTO).collect(Collectors.toList());
+			return stockDetails.stream().map(StockMarketUtility::convertToStockPriceDetailsDTO).collect(Collectors.toList());
 	};
 	//----------------------------------------------------------------------------
 	public StockPriceDetailsDTO getStockPriceDetailsDTO(StockPriceDetails stockDetails)	{

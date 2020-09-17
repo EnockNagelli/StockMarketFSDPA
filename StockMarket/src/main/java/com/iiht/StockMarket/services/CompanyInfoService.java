@@ -6,9 +6,9 @@ import com.iiht.StockMarket.dto.CompanyDetailsDTO;
 
 public interface CompanyInfoService {
 
-	public Boolean saveCompanyDetails(CompanyDetailsDTO companyDetailsDTO);
-	public Boolean deleteCompany(Long companyCode);
+	public CompanyDetailsDTO saveCompanyDetails(CompanyDetailsDTO companyDetailsDTO);
+	public CompanyDetailsDTO deleteCompany(Long companyCode);
 	//----------------------------------------------------------------------------
-	public CompanyDetailsDTO getCompanyInfoByCode(Long companyCode);
+	public CompanyDetailsDTO getCompanyInfoById(Long companyCode);
 	public List<CompanyDetailsDTO> getAllCompanies();
 }

@@ -2,10 +2,14 @@ package com.iiht.StockMarket.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,9 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.iiht.StockMarket.dto.CompanyDetailsDTO;
+import com.iiht.StockMarket.dto.InvalidCompanyExceptionResponse;
+import com.iiht.StockMarket.exception.CompanyNotFoundException;
+import com.iiht.StockMarket.exception.InvalidCompanyException;
 import com.iiht.StockMarket.services.CompanyInfoService;
 
 @RestController
+@RequestMapping (value = "/company")
 public class CompanyInfoController {
 
 	@Autowired
@@ -25,7 +33,7 @@ public class CompanyInfoController {
 	//-------------------------------------------------------------------------------------------------------------------------------
 	// SERVICE OPERATIONS
 	//-------------------------------------------------------------------------------------------------------------------------------
-	@RequestMapping (value = "/")																						// 1. WORKING
+	@RequestMapping (value = "/home")																						// 1. WORKING
  	public String landingPage() {
  		return "Welcome to StockMarket Application - Dealing with Stock Market Business - Companies and Stock Price Index.";
  	}
@@ -35,31 +43,52 @@ public class CompanyInfoController {
  		return "Welcome to StockMarket Application - Company Information : List companies is a Stock Exchange.";
  	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	@PostMapping(value="/company/newCompany")																			// 3. WORKING
-	public ResponseEntity<Boolean> addCompanyDetails(@RequestBody CompanyDetailsDTO companyDetailsDTO) {
-		Boolean value = companyInfoService.saveCompanyDetails(companyDetailsDTO);
-		if (value) {
-			return new ResponseEntity<Boolean>(value, HttpStatus.OK);
-		}
-		return new ResponseEntity<Boolean>(value, HttpStatus.INTERNAL_SERVER_ERROR);
-	}	
-	//-------------------------------------------------------------------------------------------------------------------------------
-	@DeleteMapping(value = "/company/deleteCompany/{companyCode}")														// 4. WORKING
-	public ResponseEntity<Boolean> deleteCompanyDetails(@PathVariable Long companyCode) {
-		Boolean value = companyInfoService.deleteCompany(companyCode);
-		if (value) {
-			return new ResponseEntity<Boolean>(value, HttpStatus.OK);
-		}
-		return new ResponseEntity<Boolean>(value, HttpStatus.INTERNAL_SERVER_ERROR);
+	@PostMapping(value="/addCompany")																					// 3. WORKING
+	public ResponseEntity<CompanyDetailsDTO> addCompanyDetails(@Valid @RequestBody CompanyDetailsDTO companyDetailsDTO, BindingResult bindingResult) throws InvalidCompanyException {
+
+		if(bindingResult.hasErrors())
+			throw new InvalidCompanyException("Invalid Company Details!!!");
+		else
+			return new ResponseEntity<CompanyDetailsDTO>(companyInfoService.saveCompanyDetails(companyDetailsDTO), HttpStatus.OK);
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	@GetMapping(value = "/company/getAllCompanies", produces = "application/json")										// 5. WORKING
-	public ResponseEntity<List<CompanyDetailsDTO>> getAllCompanies() {
-		return new ResponseEntity<List<CompanyDetailsDTO>>(companyInfoService.getAllCompanies(), HttpStatus.OK);
+	@DeleteMapping(value = "/deleteCompany/{companyCode}")																// 4. WORKING
+	public ResponseEntity<CompanyDetailsDTO> deleteCompanyDetails(@PathVariable("companyCode") Long companyCode) {
+	
+		if(companyInfoService.deleteCompany(companyCode) == null)
+			throw new CompanyNotFoundException("Invalid Company Code!! Please enter valid companyCode...");
+		else	
+			return new ResponseEntity<CompanyDetailsDTO>(companyInfoService.deleteCompany(companyCode), HttpStatus.OK);
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	@GetMapping(value = "/company/getCompanyInfoByCode/{companyCode}")													// 6. WORKING
-	public ResponseEntity<CompanyDetailsDTO> getCompanyByCode(@PathVariable Long companyCode) {
-		return new ResponseEntity<CompanyDetailsDTO>(companyInfoService.getCompanyInfoByCode(companyCode), HttpStatus.OK);
+	@GetMapping(value = "/getCompanyInfoById/{companyCode}")													// 6. WORKING
+	public ResponseEntity<CompanyDetailsDTO> getCompanyDetailsById(@PathVariable("companyCode") Long companyCode) {
+		
+		if(companyInfoService.getCompanyInfoById(companyCode) == null)
+			throw new CompanyNotFoundException("Invalid Company Code!! Please enter valid companyCode...");
+		else	
+			return new ResponseEntity<CompanyDetailsDTO>(companyInfoService.getCompanyInfoById(companyCode), HttpStatus.OK);
+	}
+	//-------------------------------------------------------------------------------------------------------------------------------
+	@GetMapping(value = "/getAllCompanies", produces = "application/json")										// 5. WORKING
+	public ResponseEntity<List<CompanyDetailsDTO>> getAllCompanies() {		
+			return new ResponseEntity<List<CompanyDetailsDTO>>(companyInfoService.getAllCompanies(), HttpStatus.OK);
+	}
+	
+	//================================================================================================
+	//			UTITLITY EXCEPTION HANDLERS - 2
+	//================================================================================================
+	@ExceptionHandler(InvalidCompanyException.class)
+	public ResponseEntity<InvalidCompanyExceptionResponse> companyHandler(InvalidCompanyException ex) {
+		InvalidCompanyExceptionResponse resp = new InvalidCompanyExceptionResponse(ex.getMessage(),System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value());
+		ResponseEntity<InvalidCompanyExceptionResponse> response =	new ResponseEntity<InvalidCompanyExceptionResponse>(resp, HttpStatus.BAD_REQUEST);
+		return response;
+	}
+	//------------------------------------------------------------------------------------------------
+	@ExceptionHandler(CompanyNotFoundException.class)
+	public ResponseEntity<InvalidCompanyExceptionResponse> companyHandler(CompanyNotFoundException ex){
+		InvalidCompanyExceptionResponse resp = new InvalidCompanyExceptionResponse(ex.getMessage(),System.currentTimeMillis(), HttpStatus.NOT_FOUND.value());
+		ResponseEntity<InvalidCompanyExceptionResponse> response = new ResponseEntity<InvalidCompanyExceptionResponse>(resp, HttpStatus.NOT_FOUND);
+		return response;
 	}	
 }

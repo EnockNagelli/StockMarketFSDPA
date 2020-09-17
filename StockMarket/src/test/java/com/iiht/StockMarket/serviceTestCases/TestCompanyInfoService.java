@@ -4,15 +4,16 @@ import static com.iiht.StockMarket.utilTestClass.TestUtils.businessTestFile;
 import static com.iiht.StockMarket.utilTestClass.TestUtils.currentTest;
 import static com.iiht.StockMarket.utilTestClass.TestUtils.yakshaAssert;
 
-import static org.mockito.Mockito.when;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.iiht.StockMarket.dto.CompanyDetailsDTO;
-import com.iiht.StockMarket.model.CompanyDetails;
 import com.iiht.StockMarket.services.CompanyInfoService;
 import com.iiht.StockMarket.services.CompanyInfoServiceImpl;
 import com.iiht.StockMarket.utilTestClass.MasterData;
@@ -35,30 +36,46 @@ public class TestCompanyInfoService
 	//--------------------------------------------------------------------------------------------------------------------------------
 	@Test 
 	public void testSaveCompanyInfoServiceImpl() throws Exception {
-		when(companyInfoService.saveCompanyDetails(MasterData.getCompanyDetailsDTO())).thenReturn(true); 
-		CompanyDetailsDTO commentFromdb = companyInfoService.getCompanyInfoByCode(companyDetailsDTO.getCompanyCode());
-	    yakshaAssert(currentTest(), commentFromdb != null ? true : false, businessTestFile);
+		
+		Mockito.when(companyInfoService.saveCompanyDetails(MasterData.getCompanyDetailsDTO())).thenReturn(companyDetailsDTO); 
+		
+		CompanyDetailsDTO commentFromdb = companyInfoService.getCompanyInfoById(companyDetailsDTO.getCompanyCode());
+	    
+		yakshaAssert(currentTest(), commentFromdb != null ? true : false, businessTestFile);
 	}
 	//--------------------------------------------------------------------------------------------------------------------------------
 	@Test
 	public void testCompanyInfoServiceImpl() throws Exception {
-		boolean value = companyInfoService.saveCompanyDetails(MasterData.getCompanyDetailsDTO());
-	    yakshaAssert(currentTest(), value ? true : false, businessTestFile);
+		
+		CompanyDetailsDTO value = companyInfoService.saveCompanyDetails(MasterData.getCompanyDetailsDTO());
+	    
+		yakshaAssert(currentTest(), value != null ? true : false, businessTestFile);
 	}
 	//--------------------------------------------------------------------------------------------------------------------------------
 	@Test 
 	public void testViewAllCompanyDetails() throws Exception {
-		CompanyDetailsDTO value = MasterData.getCompanyDetailsDTO();
-        CompanyDetails company = new CompanyDetails((long)5002, "NSE", "IBM", "Navin Gupta", 765332.27, "AAA, BBB, CCC", "Base Location is in Mumbai, India");
-		when(companyInfoServiceImpl.getCompanyDetailsDTO(company)).thenReturn(value);
-		CompanyDetailsDTO commentFromdb = companyInfoServiceImpl.getCompanyDetailsDTO(company);		
-	    yakshaAssert(currentTest(), commentFromdb == value ? true : false, businessTestFile);
+		
+		//CompanyDetailsDTO value = MasterData.getCompanyDetailsDTO();
+		List<CompanyDetailsDTO> companyList = new ArrayList<CompanyDetailsDTO>();
+
+		//CompanyDetails company = new CompanyDetails((long)5002, "BSE", "IBM", "Navin Gupta", 665332.27, "AAA, BBB, CCC", "Base Location is in Mumbai, India");
+		
+        Mockito.when(companyInfoServiceImpl.getAllCompanies()).thenReturn(companyList);
+		
+		List<CompanyDetailsDTO> commentFromdb = companyInfoServiceImpl.getAllCompanies();		
+	    
+		yakshaAssert(currentTest(), commentFromdb != null ? true : false, businessTestFile);
 	}
 	//--------------------------------------------------------------------------------------------------------------------------------
 	@Test
-	public void testViewAllCompanyDetailsCase() throws Exception { 
-		when(companyInfoServiceImpl.getCompanyDetailsDTO(new CompanyDetails())).thenReturn(null);
-		CompanyDetailsDTO commentFromdb = companyInfoService.getCompanyInfoByCode(companyDetailsDTO.getCompanyCode());
-	    yakshaAssert(currentTest(), commentFromdb==null ? true : false, businessTestFile);
+	public void testViewACompanyDetails() throws Exception {
+		
+		CompanyDetailsDTO value = MasterData.getCompanyDetailsDTO();
+
+		Mockito.when(companyInfoServiceImpl.getCompanyInfoById(value.getCompanyCode())).thenReturn(value);
+		
+		CompanyDetailsDTO commentFromdb = companyInfoService.getCompanyInfoById(companyDetailsDTO.getCompanyCode());
+	    
+		yakshaAssert(currentTest(), commentFromdb == null ? true : false, businessTestFile);
 	}
 }

@@ -6,9 +6,10 @@ import java.util.Map;
 
 import com.iiht.StockMarket.dto.StockPriceDetailsDTO;
 
-public interface StockMarketService {
-	public Boolean saveStockPriceDetails(StockPriceDetailsDTO stockPriceDetailsDTO);
-	public Boolean deleteStock(Long companyCode);
+public interface StockMarketService 
+{
+	public StockPriceDetailsDTO saveStockPriceDetails(StockPriceDetailsDTO stockPriceDetailsDTO);
+	public List<StockPriceDetailsDTO> deleteStock(Long companyCode);
 	//----------------------------------------------------------------------------------------
 	public List<StockPriceDetailsDTO> getAllStockDetails();
 	public List<StockPriceDetailsDTO> getStockByCode(Long companyCode);

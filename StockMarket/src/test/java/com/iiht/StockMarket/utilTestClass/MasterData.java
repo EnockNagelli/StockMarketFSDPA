@@ -20,7 +20,7 @@ public class MasterData
 	{
 		CompanyDetailsDTO companyDetails = new CompanyDetailsDTO();
 		
-		companyDetails.setCompanyCode(companyDetails.getCompanyCode());
+		companyDetails.setCompanyCode((long)1001);
 		companyDetails.setStockExchange("BSE");
 		companyDetails.setCompanyName("IIHT Pvt Ltd, Bangalore");
 		companyDetails.setCompanyCEO("Praveen Kumar");
@@ -35,7 +35,7 @@ public class MasterData
 	{
 		StockPriceDetailsDTO spDetails = new StockPriceDetailsDTO();
 		
-		spDetails.setId(spDetails.getId());
+		spDetails.setId((long)1001);
 		spDetails.setCompanyCode((long)2001);
 		spDetails.setCurrentStockPrice(55.76);
 

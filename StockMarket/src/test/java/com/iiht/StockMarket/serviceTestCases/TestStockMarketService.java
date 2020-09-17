@@ -3,7 +3,6 @@ package com.iiht.StockMarket.serviceTestCases;
 import static com.iiht.StockMarket.utilTestClass.TestUtils.businessTestFile;
 import static com.iiht.StockMarket.utilTestClass.TestUtils.currentTest;
 import static com.iiht.StockMarket.utilTestClass.TestUtils.yakshaAssert;
-
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
@@ -13,6 +12,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.iiht.StockMarket.dto.StockPriceDetailsDTO;
@@ -39,15 +39,16 @@ public class TestStockMarketService
 	//--------------------------------------------------------------------------------------------------------------------------------
 	@Test 
 	public void testSaveStockMarketServiceImpl() throws Exception {
-		when(stockMarketService.saveStockPriceDetails(MasterData.getStockPriceDetailsDTO())).thenReturn(true); 
+		StockPriceDetailsDTO stock = MasterData.getStockPriceDetailsDTO();	
+		Mockito.when(stockMarketService.saveStockPriceDetails(MasterData.getStockPriceDetailsDTO())).thenReturn(stock); 
 		List<StockPriceDetailsDTO> commentFromdb = stockMarketService.getStockByCode(stockPriceDetailsDTO.getCompanyCode());
 	    yakshaAssert(currentTest(), commentFromdb != null ? true : false, businessTestFile);
 	}
 	//--------------------------------------------------------------------------------------------------------------------------------
 	@Test
 	public void testStockMarketServiceImpl() throws Exception {
-		boolean value = stockMarketService.saveStockPriceDetails(MasterData.getStockPriceDetailsDTO());
-	    yakshaAssert(currentTest(), value ? true : false, businessTestFile);
+		StockPriceDetailsDTO value = stockMarketService.saveStockPriceDetails(MasterData.getStockPriceDetailsDTO());
+	    yakshaAssert(currentTest(), value != null ? true : false, businessTestFile);
 	}
 	//--------------------------------------------------------------------------------------------------------------------------------
 	@Test 

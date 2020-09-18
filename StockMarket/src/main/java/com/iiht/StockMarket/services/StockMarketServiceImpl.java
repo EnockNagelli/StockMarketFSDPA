@@ -2,8 +2,6 @@ package com.iiht.StockMarket.services;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -12,10 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.iiht.StockMarket.dto.StockPriceDetailsDTO;
+import com.iiht.StockMarket.dto.StockPriceIndexDTO;
+import com.iiht.StockMarket.exception.StockNotFoundException;
 import com.iiht.StockMarket.model.CompanyDetails;
 import com.iiht.StockMarket.model.StockPriceDetails;
-import com.iiht.StockMarket.dto.StockPriceDetailsDTO;
-import com.iiht.StockMarket.exception.StockNotFoundException;
 import com.iiht.StockMarket.repository.CompanyInfoRepository;
 import com.iiht.StockMarket.repository.StockPriceRepository;
 import com.iiht.StockMarket.utils.StockMarketUtility;
@@ -84,30 +83,40 @@ public class StockMarketServiceImpl implements StockMarketService {
 		return stockRepository.findMinStockPrice(companyCode, startDate, endDate);
 	};
 	
-	public Map<String, Object> getStockPriceIndex(Long companyCode, LocalDate startDate, LocalDate endDate) {
+	public StockPriceIndexDTO getStockPriceIndex(Long companyCode, LocalDate startDate, LocalDate endDate) {
 		
-		Map<String, Object> stockPriceIndex = new TreeMap<String, Object>();
+		//Map<String, Object> stockPriceIndex = new TreeMap<String, Object>();
+
+		StockPriceIndexDTO stockPriceIndexDto = new StockPriceIndexDTO();
+		
+		CompanyDetails companyDetails = companyRepository.findCompanyDetailsById(companyCode);
+		stockPriceIndexDto.setCompanyDto(StockMarketUtility.convertToCompanyDetailsDTO(companyDetails));
+		
+		List<StockPriceDetailsDTO> stockPriceList = getStockByCode(companyCode);
+		stockPriceIndexDto.setStockPriceList(stockPriceList);
 
 		Double maxStockPrice = getMaxStockPrice(companyCode, startDate, endDate);
+		stockPriceIndexDto.setMaxStockPrice(maxStockPrice);
+		
 		Double avgStockPrice = getAvgStockPrice(companyCode, startDate, endDate);
+		stockPriceIndexDto.setAvgStockPrice(avgStockPrice);
+
 		Double minStockPrice = getMinStockPrice(companyCode, startDate, endDate);
-		
-		List<StockPriceDetailsDTO> stockList = getStockByCode(companyCode);
+		stockPriceIndexDto.setMinStockPrice(minStockPrice);
 
-		Double currentStockPrice = stockList.get(stockList.size()-1).getCurrentStockPrice();
+		//Double currentStockPrice = stockList.get(stockList.size()-1).getCurrentStockPrice();
 
-		CompanyDetails company = companyRepository.findCompanyDetailsById(companyCode);
-				
-		stockPriceIndex.put("1. Stock Exchange ", company.getStockExchange());
-		stockPriceIndex.put("2. Company Name ", company.getCompanyName());
-		stockPriceIndex.put("3. Company Code ", companyCode);
-		stockPriceIndex.put("4. Current Stock Price ", currentStockPrice);
-		stockPriceIndex.put("5. From Date ", startDate);
-		stockPriceIndex.put("6. To Date ", endDate);
-		stockPriceIndex.put("7. Minimum Stock Price ", minStockPrice);
-		stockPriceIndex.put("8. Average Stock Price ", avgStockPrice);
-		stockPriceIndex.put("9. Maximum Stock Price ", maxStockPrice);
-		
-		return stockPriceIndex;
+		/*
+		 * stockPriceIndex.put("1. Stock Exchange ", company.getStockExchange());
+		 * stockPriceIndex.put("2. Company Name ", company.getCompanyName());
+		 * stockPriceIndex.put("3. Company Code ", companyCode);
+		 * stockPriceIndex.put("4. Current Stock Price ", currentStockPrice);
+		 * stockPriceIndex.put("5. From Date ", startDate);
+		 * stockPriceIndex.put("6. To Date ", endDate);
+		 * stockPriceIndex.put("7. Minimum Stock Price ", minStockPrice);
+		 * stockPriceIndex.put("8. Average Stock Price ", avgStockPrice);
+		 * stockPriceIndex.put("9. Maximum Stock Price ", maxStockPrice);
+		 */		
+		return stockPriceIndexDto;
 	};
 }

@@ -3,11 +3,14 @@ package com.iiht.StockMarket.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -16,21 +19,23 @@ public class StockPriceDetailsDTO {
 	private Long Id;
 	
 	@NotNull
-	@Size(min = 1, max = 10)
+	@Min(value = 1, message = "CompanyCode should not be less than 1")
+    @Max(value = 1000, message = "CompanyCode should not be greater than 1000")
 	private Long companyCode;
 
 	@NotNull
-	@Column(precision=10, scale=2)
+	@Digits(integer = 10, fraction = 2,  message = "Stock Price must have precision 10 and factional part of 2 decimals")		//	@Digits(integer = 10 /*precision*/, fraction = 2 /*scale*/)
 	private Double currentStockPrice;
 	
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@JsonFormat(pattern="yyyy-MM-dd")
+	@PastOrPresent
 	private LocalDate stockPriceDate;
 	
 	@NotNull
-	@Column(columnDefinition = "TIME")
-	private LocalTime stockPriceTime;	
+	@PastOrPresent
+	private LocalTime stockPriceTime;
 
 	//---------------------------------------------------------------------------------------------------------------------------------
 	public StockPriceDetailsDTO() {

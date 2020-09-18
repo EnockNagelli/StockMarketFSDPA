@@ -18,18 +18,15 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.iiht.StockMarket.dto.CompanyDetailsDTO;
 import com.iiht.StockMarket.dto.StockPriceDetailsDTO;
 import com.iiht.StockMarket.utilTestClass.MasterData;
 
-@ExtendWith(SpringExtension.class)
 @RunWith(SpringRunner.class)
 public class BoundaryTests implements Serializable
 {
@@ -38,14 +35,14 @@ public class BoundaryTests implements Serializable
 	private Validator validator;
 
     //----------------------------------------------------------------------------------------------
-    @BeforeEach
+    @Before
     public void setUp() {
     	ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
 
     //=============================================================================================
-	//			1. CompanyDetiails - Properties length validation
+	//			1. CompanyDetiails - Validating length of all properties
     //=============================================================================================
 	@Test
 	public void testCompanyCodeTitleLength() throws Exception 
@@ -131,7 +128,7 @@ public class BoundaryTests implements Serializable
     }
 
     //=============================================================================================
-	//	 		2. StockPriceDetiails - Properties length validation
+	//			2. StockPriceDetiails - Validating length of all properties
     //=============================================================================================
 	@Test
 	public void testCurrentStockPriceLength() throws Exception

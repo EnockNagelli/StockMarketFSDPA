@@ -2,7 +2,6 @@ package com.iiht.StockMarket.controller;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.iiht.StockMarket.dto.InvalidStockExceptionResponse;
 import com.iiht.StockMarket.dto.StockPriceDetailsDTO;
+import com.iiht.StockMarket.dto.StockPriceIndexDTO;
 import com.iiht.StockMarket.exception.InvalidStockException;
 import com.iiht.StockMarket.exception.StockNotFoundException;
 import com.iiht.StockMarket.services.StockMarketService;
@@ -73,12 +73,12 @@ public class StockPriceController {
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
 	@GetMapping(value = "/getStockPriceIndex/{companyCode}/{startDate}/{endDate}")										// 6. WORKING
-	public ResponseEntity<Map<String, Object>> displayStockPriceIndex(@PathVariable Long companyCode, @PathVariable Date startDate, @PathVariable Date endDate) {
+	public ResponseEntity<StockPriceIndexDTO> displayStockPriceIndex(@PathVariable Long companyCode, @PathVariable Date startDate, @PathVariable Date endDate) {
 		
 		if(stockMarketService.getStockPriceIndex(companyCode, startDate.toLocalDate(), endDate.toLocalDate()) == null)
 			throw new StockNotFoundException("Invalid Company Code or Date!!! Please enter valid Details...");
 		else	
-			return new ResponseEntity<Map<String, Object>>(stockMarketService.getStockPriceIndex(companyCode, startDate.toLocalDate(), endDate.toLocalDate()), HttpStatus.OK);
+			return new ResponseEntity<StockPriceIndexDTO>(stockMarketService.getStockPriceIndex(companyCode, startDate.toLocalDate(), endDate.toLocalDate()), HttpStatus.OK);
 	}
 	
 	//================================================================================================

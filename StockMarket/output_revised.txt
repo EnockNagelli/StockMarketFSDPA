@@ -1,0 +1,3 @@
+
+testCompanyRepository=false
+testStockRepository=true

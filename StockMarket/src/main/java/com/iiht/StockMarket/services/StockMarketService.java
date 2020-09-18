@@ -2,9 +2,9 @@ package com.iiht.StockMarket.services;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 import com.iiht.StockMarket.dto.StockPriceDetailsDTO;
+import com.iiht.StockMarket.dto.StockPriceIndexDTO;
 
 public interface StockMarketService 
 {
@@ -14,5 +14,5 @@ public interface StockMarketService
 	public List<StockPriceDetailsDTO> getAllStockDetails();
 	public List<StockPriceDetailsDTO> getStockByCode(Long companyCode);
 	//----------------------------------------------------------------------------------------
-	public Map<String, Object> getStockPriceIndex(Long companyCode, LocalDate startDate, LocalDate endDate);
+	public StockPriceIndexDTO getStockPriceIndex(Long companyCode, LocalDate startDate, LocalDate endDate);
 }

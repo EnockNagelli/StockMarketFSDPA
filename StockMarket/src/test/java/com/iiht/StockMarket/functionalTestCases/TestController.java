@@ -7,24 +7,19 @@ import static com.iiht.StockMarket.utilTestClass.TestUtils.yakshaAssert;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -33,12 +28,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.iiht.StockMarket.controller.CompanyInfoController;
 import com.iiht.StockMarket.controller.StockPriceController;
-
 import com.iiht.StockMarket.dto.CompanyDetailsDTO;
 import com.iiht.StockMarket.dto.StockPriceDetailsDTO;
+import com.iiht.StockMarket.dto.StockPriceIndexDTO;
 import com.iiht.StockMarket.services.CompanyInfoService;
 import com.iiht.StockMarket.services.StockMarketService;
-
 import com.iiht.StockMarket.utilTestClass.MasterData;
 
 @WebMvcTest({CompanyInfoController.class, StockPriceController.class})
@@ -501,14 +495,23 @@ public class TestController {
 	@Test 
 	public void testStockPriceIndex() throws Exception 
 	{ 
-        StockPriceDetailsDTO stockDto = MasterData.getStockPriceDetailsDTO();
-        Long companyCode    = stockDto.getCompanyCode();
-        LocalDate startDate = LocalDate.parse("2020-08-01");		//stockDto.getStockPriceDate();
-        LocalDate endDate   = stockDto.getStockPriceDate();
-
-        Map<String, Object> stockPriceIndex = new TreeMap<String, Object>();
+        StockPriceIndexDTO stockPriceIndexDto = MasterData.getStockPriceIndexDTO();
         
-		Mockito.when(stockMarketService.getStockPriceIndex(companyCode, startDate, endDate)).thenReturn(stockPriceIndex);
+        CompanyDetailsDTO companyDetailDTO    = stockPriceIndexDto.getCompanyDto();
+        Long companyCode = companyDetailDTO.getCompanyCode();
+        
+        List<StockPriceDetailsDTO> stockPDDTOList = stockPriceIndexDto.getStockPriceList();
+        
+        StockPriceDetailsDTO spDetails1 = stockPDDTOList.get(0);
+        StockPriceDetailsDTO spDetails2 = stockPDDTOList.get(1);
+        
+        LocalDate startDate = spDetails1.getStockPriceDate();
+        LocalDate endDate   = spDetails2.getStockPriceDate();
+
+        //Map<String, Object> stockPriceIndex = new TreeMap<String, Object>();
+        StockPriceIndexDTO stockPriceIndexDTO = new StockPriceIndexDTO();
+        
+		Mockito.when(stockMarketService.getStockPriceIndex(companyCode, startDate, endDate)).thenReturn(stockPriceIndexDTO);
 
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/stock/getStockPriceIndex/"+companyCode+"/"+startDate+"/"+endDate)
 				.contentType(MediaType.APPLICATION_JSON)
@@ -516,7 +519,7 @@ public class TestController {
 
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
-		yakshaAssert(currentTest(),	result.getResponse().getContentAsString().contentEquals(MasterData.asJsonString(stockDto))? true : false, businessTestFile);		
+		yakshaAssert(currentTest(),	result.getResponse().getContentAsString().contentEquals(MasterData.asJsonString(stockPriceIndexDto))? true : false, businessTestFile);		
 	}
 	//-- BDD Test : getStockPriceIndex ------------------------------------------------------------------------------------------
 	@Test
@@ -524,24 +527,42 @@ public class TestController {
 	{
 		final int count[] = new int[1];
 	
-        StockPriceDetailsDTO stockDto = MasterData.getStockPriceDetailsDTO();
-        Long companyCode    = stockDto.getCompanyCode();
-        LocalDate startDate = LocalDate.parse("2020-08-01");		//stockDto.getStockPriceDate();
-        LocalDate endDate   = stockDto.getStockPriceDate();
+        //StockPriceDetailsDTO stockDto = MasterData.getStockPriceDetailsDTO();
+        //Long companyCode    = stockDto.getCompanyCode();
+        //LocalDate startDate = LocalDate.parse("2020-08-01");		//stockDto.getStockPriceDate();
+        //LocalDate endDate   = stockDto.getStockPriceDate();
 
-        Map<String, Object> stockPriceIndex = new TreeMap<String, Object>();
+        //Map<String, Object> stockPriceIndex = new TreeMap<String, Object>();
         
-		Mockito.when(stockMarketService.getStockPriceIndex(companyCode, startDate, endDate)).then(new Answer<Map<String, Object>>() {
+        //----------------------------------------------------------------------------------
+        StockPriceIndexDTO stockPriceDto = MasterData.getStockPriceIndexDTO();
+        
+        CompanyDetailsDTO companyDetailDTO = stockPriceDto.getCompanyDto();
+        Long companyCode = companyDetailDTO.getCompanyCode();
+        
+        List<StockPriceDetailsDTO> stockPDDTOList = stockPriceDto.getStockPriceList();
+        
+        StockPriceDetailsDTO spDetails1 = stockPDDTOList.get(0);
+        StockPriceDetailsDTO spDetails2 = stockPDDTOList.get(1);
+        
+        LocalDate startDate = spDetails1.getStockPriceDate();
+        LocalDate endDate   = spDetails2.getStockPriceDate();
+
+        //Map<String, Object> stockPriceIndex = new TreeMap<String, Object>();
+        StockPriceIndexDTO stockPriceIndexDTO = new StockPriceIndexDTO();
+        
+        //----------------------------------------------------------------------------------
+		Mockito.when(stockMarketService.getStockPriceIndex(companyCode, startDate, endDate)).then(new Answer<StockPriceIndexDTO>() {
 			@Override
-			public Map<String, Object> answer(InvocationOnMock invocation) throws Throwable {
+			public StockPriceIndexDTO answer(InvocationOnMock invocation) throws Throwable {
 				System.out.println("Called");
 				count[0]++;
-				return stockPriceIndex;
+				return stockPriceIndexDTO;
 			}
 		});
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/stock/getStockPriceIndex/"+companyCode+"/"+startDate+"/"+endDate)
-				.content(MasterData.asJsonString(stockDto))
+				.content(MasterData.asJsonString(stockPriceDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		

@@ -48,12 +48,12 @@ public class StockPriceController {
 			return new ResponseEntity<StockPriceDetailsDTO>(stockMarketService.saveStockPriceDetails(stockPriceDetailsDTO), HttpStatus.OK);
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	@RequestMapping(value="/getAllStock", produces = "application/json")											// 3. WORKING
-	public ResponseEntity<List<StockPriceDetailsDTO>> getAllStockDetails() {
-		return new ResponseEntity<List<StockPriceDetailsDTO>>(stockMarketService.getAllStockDetails(), HttpStatus.OK);
-	}
+//	@RequestMapping(value="/getAllStock", produces = "application/json")												// 3. WORKING
+//	public ResponseEntity<List<StockPriceDetailsDTO>> getAllStockDetails() {
+//		return new ResponseEntity<List<StockPriceDetailsDTO>>(stockMarketService.getAllStockDetails(), HttpStatus.OK);
+//	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	@DeleteMapping(value = "/deleteStock/{companyCode}")															// 4. WORKING
+	@DeleteMapping(value = "/deleteStock/{companyCode}")																// 4. WORKING
 	public ResponseEntity<List<StockPriceDetailsDTO>> deleteStockByCompanyCode(@PathVariable Long companyCode) {
 
 		if(stockMarketService.deleteStock(companyCode) == null)
@@ -81,9 +81,9 @@ public class StockPriceController {
 			return new ResponseEntity<StockPriceIndexDTO>(stockMarketService.getStockPriceIndex(companyCode, startDate.toLocalDate(), endDate.toLocalDate()), HttpStatus.OK);
 	}
 	
-	//================================================================================================
+	//===============================================================================================================================
 	//			UTITLITY EXCEPTION HANDLERS - 2
-	//================================================================================================
+	//===============================================================================================================================
 	@ExceptionHandler(InvalidStockException.class)
 	public ResponseEntity<InvalidStockExceptionResponse> companyHandler(InvalidStockException ex) {
 		InvalidStockExceptionResponse resp = new InvalidStockExceptionResponse(ex.getMessage(),System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value());

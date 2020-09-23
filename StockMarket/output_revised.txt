@@ -1,3 +1,27 @@
 
+testDeleteStock=false
+testDeleteCompany=true
+testDeleteStockBDD=false
+testFindAllCompanies=true
+testFindStockByCompanyCodeBDD=false
+testFindCompanyInfoById=true
+testAddStock=false
+testFindAllCompaniesBDD=true
+testAddStockBDD=false
+testFindCompanyInfoByIdBDD=false
+testDeleteCompanyBDD=false
+testAddCompanyBDD=false
+testFindStockByCompanyCode=false
+testStockPriceIndex=false
+testStockPriceIndexBDD=false
+testAddCompany=false
 testCompanyRepository=false
 testStockRepository=true
+testViewACompanyDetails=true
+testCompanyInfoServiceImpl=false
+testSaveCompanyInfoServiceImpl=false
+testViewAllCompanyDetails=true
+testStockMarketServiceImpl=false
+testViewCurrentStock=true
+testSaveStockMarketServiceImpl=true
+testViewCurrentStockCase=false

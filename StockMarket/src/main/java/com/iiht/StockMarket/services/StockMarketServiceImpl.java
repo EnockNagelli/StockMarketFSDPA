@@ -49,15 +49,15 @@ public class StockMarketServiceImpl implements StockMarketService {
 			throw new StockNotFoundException("Invalid Company Code. No Stock available against this company code.");
 	};
 	//----------------------------------------------------------------------------
-	public List<StockPriceDetailsDTO> getAllStockDetails() {
+//	public List<StockPriceDetailsDTO> getAllStockDetails() {
 
-		List<StockPriceDetails> stockDetails = stockRepository.findAll();
+//		List<StockPriceDetails> stockDetails = stockRepository.findAll();
 		
-		if(CollectionUtils.isEmpty(stockDetails))
-			return null;
-		else
-			return stockDetails.stream().map(StockMarketUtility::convertToStockPriceDetailsDTO).collect(Collectors.toList());
-	};
+//		if(CollectionUtils.isEmpty(stockDetails))
+//			return null;
+//		else
+//			return stockDetails.stream().map(StockMarketUtility::convertToStockPriceDetailsDTO).collect(Collectors.toList());
+//	};
 	//----------------------------------------------------------------------------
 	public List<StockPriceDetailsDTO> getStockByCode(Long companyCode){
 

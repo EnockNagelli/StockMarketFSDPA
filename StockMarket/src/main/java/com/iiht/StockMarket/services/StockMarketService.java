@@ -11,7 +11,7 @@ public interface StockMarketService
 	public StockPriceDetailsDTO saveStockPriceDetails(StockPriceDetailsDTO stockPriceDetailsDTO);
 	public List<StockPriceDetailsDTO> deleteStock(Long companyCode);
 	//----------------------------------------------------------------------------------------
-	public List<StockPriceDetailsDTO> getAllStockDetails();
+	//public List<StockPriceDetailsDTO> getAllStockDetails();
 	public List<StockPriceDetailsDTO> getStockByCode(Long companyCode);
 	//----------------------------------------------------------------------------------------
 	public StockPriceIndexDTO getStockPriceIndex(Long companyCode, LocalDate startDate, LocalDate endDate);

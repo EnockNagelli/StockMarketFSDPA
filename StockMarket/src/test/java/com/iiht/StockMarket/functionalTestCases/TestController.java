@@ -155,7 +155,6 @@ public class TestController {
 		});
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/company/deleteCompany/" + companyCode)
-//				.content(MasterData.asJsonString(companyDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		
@@ -204,7 +203,6 @@ public class TestController {
 		});
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/company/getCompanyInfoById/" + companyCode)
-//				.content(MasterData.asJsonString(companyDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		
@@ -230,7 +228,6 @@ public class TestController {
 		Mockito.when(companyService.getAllCompanies()).thenReturn(list);
 
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/company/getAllCompanies")
-//				.content(MasterData.asJsonString(MasterData.getCompanyDetailsDTO()))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 
@@ -259,7 +256,6 @@ public class TestController {
 		});
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/company/getAllCompanies")
-//				.content(MasterData.asJsonString(list))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		
@@ -367,7 +363,6 @@ public class TestController {
 		});
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/stock/deleteStock/" + companyCode)
-//				.content(MasterData.asJsonString(stockDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		
@@ -420,7 +415,6 @@ public class TestController {
 		});
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/stock/getStockByCompanyCode/" + companyCode)
-//				.content(MasterData.asJsonString(stockDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		
@@ -431,61 +425,6 @@ public class TestController {
 		yakshaAssert(currentTest(), count[0] == 1 ? true : false, businessTestFile);			
 	}	
 	
-	//---------------------------------------------------------------------------------------------------------------------------
-	//				4. Testing Rest End Point - /stock/getAllStock
-	//-- Test 1 : getAllStock ---------------------------------------------------------------------------------------------------
-	/*
-	 * Description : This test is to perform view all the StockPriceDetails from database
-	 */
-//	@Test 
-//	public void testFindAllStock() throws Exception 
-//	{ 
-//		List<StockPriceDetailsDTO> stockList = new ArrayList<StockPriceDetailsDTO>();
-//		stockList.add(MasterData.getStockPriceDetailsDTO());
-		
-//		Mockito.when(stockMarketService.getAllStockDetails()).thenReturn(stockList);
-
-//		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/stock/getAllStock")
-//				.content(MasterData.asJsonString(MasterData.getStockPriceDetailsDTO()))
-//				.contentType(MediaType.APPLICATION_JSON)
-//				.accept(MediaType.APPLICATION_JSON);
-
-//		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-		
-//		System.out.println(result.getResponse().getContentAsString());
-//		System.out.println(MasterData.asJsonString(stockList));
-//		yakshaAssert(currentTest(), (result.getResponse().getContentAsString().contentEquals(MasterData.asJsonString(stockList))? "true" : "false"),	businessTestFile);
-//	}
-	//-- BDD Test : getAllStockBDD ----------------------------------------------------------------------------------------------
-//	@Test
-//	public void testFindAllStockBDD() throws Exception 
-//	{
-//		final int count[] = new int[1];
-
-//		List<StockPriceDetailsDTO> stockList = new ArrayList<StockPriceDetailsDTO>();
-//		stockList.add(MasterData.getStockPriceDetailsDTO());		
-		
-//		Mockito.when(companyService.getAllCompanies()).then(new Answer<List<StockPriceDetailsDTO>>() {
-//			@Override
-//			public List<StockPriceDetailsDTO> answer(InvocationOnMock invocation) throws Throwable {
-//				System.out.println("Called : testFindAllStockBDD");
-//				count[0]++;
-//				return stockList;
-//			}
-//		});
-		
-//		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/stock/getAllStock")
-//				.content(MasterData.asJsonString(stockList))
-//				.contentType(MediaType.APPLICATION_JSON)
-//				.accept(MediaType.APPLICATION_JSON);
-		
-//		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
-		
-//		System.out.println(result.getResponse().getContentAsString());
-//		System.out.println(count[0]);
-//		yakshaAssert(currentTest(), count[0] == 1 ? true : false, businessTestFile);
-//	}
-
 	//---------------------------------------------------------------------------------------------------------------------------
 	//				5. Testing Rest End Point - /stock/getStockPriceIndex
 	//-- Test 1 : getStockPriceIndex --------------------------------------------------------------------------------------------
@@ -507,7 +446,6 @@ public class TestController {
         LocalDate startDate = spDetails1.getStockPriceDate();
         LocalDate endDate   = spDetails2.getStockPriceDate();
 
-        //Map<String, Object> stockPriceIndex = new TreeMap<String, Object>();
         StockPriceIndexDTO stockPriceIndexDTO = new StockPriceIndexDTO();
         
 		Mockito.when(stockMarketService.getStockPriceIndex(companyCode, startDate, endDate)).thenReturn(stockPriceIndexDTO);
@@ -526,12 +464,6 @@ public class TestController {
 	{
 		final int count[] = new int[1];
 	
-        //StockPriceDetailsDTO stockDto = MasterData.getStockPriceDetailsDTO();
-        //Long companyCode    = stockDto.getCompanyCode();
-        //LocalDate startDate = LocalDate.parse("2020-08-01");		//stockDto.getStockPriceDate();
-        //LocalDate endDate   = stockDto.getStockPriceDate();
-
-        //Map<String, Object> stockPriceIndex = new TreeMap<String, Object>();
         StockPriceIndexDTO stockPriceIndexDTO = new StockPriceIndexDTO();
         
         StockPriceIndexDTO stockPriceDto = MasterData.getStockPriceIndexDTO();
@@ -557,7 +489,6 @@ public class TestController {
 		});
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/stock/getStockPriceIndex/"+companyCode+"/"+startDate+"/"+endDate)
-//				.content(MasterData.asJsonString(stockPriceDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		

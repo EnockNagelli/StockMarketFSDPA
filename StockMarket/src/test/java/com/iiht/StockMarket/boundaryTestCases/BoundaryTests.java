@@ -9,8 +9,6 @@ import static com.iiht.StockMarket.utilTestClass.TestUtils.yakshaAssert;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -93,7 +91,6 @@ public class BoundaryTests implements Serializable
 		CompanyDetailsDTO companyDetails = MasterData.getCompanyDetailsDTO();
 		companyDetails.setBoardOfDirectors("AAA");
 		Set<ConstraintViolation<CompanyDetailsDTO>> violations = validator.validate(companyDetails);
-		//Set<ConstraintViolation<CompanyDetailsDTO>> violations = validator.validateProperty(companyDetails, "boardOfDirectors");
 		yakshaAssert(currentTest(), !violations.isEmpty()? true : false, boundaryTestFile);
 	}
 	//---------------------------------------------------------------------------------------------	
@@ -141,7 +138,6 @@ public class BoundaryTests implements Serializable
 	public void testStockPriceDateLength() throws Exception
 	{
 		StockPriceDetailsDTO stockPrice = MasterData.getStockPriceDetailsDTO();
-		//stockPrice.setStockPriceDate(LocalDate.parse("2020-09-08"));
 		stockPrice.setStockPriceDate(null);
         Set<ConstraintViolation<StockPriceDetailsDTO>> violations = validator.validate(stockPrice);
 	    yakshaAssert(currentTest(), !violations.isEmpty() ? true : false, boundaryTestFile);
@@ -151,7 +147,6 @@ public class BoundaryTests implements Serializable
 	public void testStockPriceTimeLength() throws Exception
 	{
 		StockPriceDetailsDTO stockPrice = MasterData.getStockPriceDetailsDTO();
-		//stockPrice.setStockPriceTime(LocalTime.parse("09:30:00"));
 		stockPrice.setStockPriceTime(null);
         Set<ConstraintViolation<StockPriceDetailsDTO>> violations = validator.validate(stockPrice);
 	    yakshaAssert(currentTest(), !violations.isEmpty() ? true : false, boundaryTestFile);

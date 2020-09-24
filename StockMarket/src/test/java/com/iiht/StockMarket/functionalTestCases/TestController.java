@@ -99,7 +99,7 @@ public class TestController {
 		Mockito.when(companyService.saveCompanyDetails(companyDto)).then(new Answer<CompanyDetailsDTO>() {
 			@Override
 			public CompanyDetailsDTO answer(InvocationOnMock invocation) throws Throwable {
-				System.out.println("Called");
+				System.out.println("Called : testAddCompanyBDD");
 				count[0]++;
 				return companyDto;
 			}
@@ -148,14 +148,14 @@ public class TestController {
 		Mockito.when(companyService.deleteCompany(companyCode)).then(new Answer<CompanyDetailsDTO>() {
 			@Override
 			public CompanyDetailsDTO answer(InvocationOnMock invocation) throws Throwable {
-				System.out.println("Called");
+				System.out.println("Called : testDeleteCompanyBDD");
 				count[0]++;
 				return MasterData.getCompanyDetailsDTO();
 			}
 		});
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/company/deleteCompany/" + companyCode)
-				.content(MasterData.asJsonString(companyDto))
+//				.content(MasterData.asJsonString(companyDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		
@@ -197,14 +197,14 @@ public class TestController {
 		Mockito.when(companyService.getCompanyInfoById(companyCode)).then(new Answer<CompanyDetailsDTO>() {
 			@Override
 			public CompanyDetailsDTO answer(InvocationOnMock invocation) throws Throwable {
-				System.out.println("Called");
+				System.out.println("Called : testFindCompanyInfoByIdBDD");
 				count[0]++;
 				return MasterData.getCompanyDetailsDTO();
 			}
 		});
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/company/getCompanyInfoById/" + companyCode)
-				.content(MasterData.asJsonString(companyDto))
+//				.content(MasterData.asJsonString(companyDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		
@@ -230,7 +230,7 @@ public class TestController {
 		Mockito.when(companyService.getAllCompanies()).thenReturn(list);
 
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/company/getAllCompanies")
-				.content(MasterData.asJsonString(MasterData.getCompanyDetailsDTO()))
+//				.content(MasterData.asJsonString(MasterData.getCompanyDetailsDTO()))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 
@@ -252,14 +252,14 @@ public class TestController {
 		Mockito.when(companyService.getAllCompanies()).then(new Answer<List<CompanyDetailsDTO>>() {
 			@Override
 			public List<CompanyDetailsDTO> answer(InvocationOnMock invocation) throws Throwable {
-				System.out.println("Called");
+				System.out.println("Called : testFindAllCompaniesBDD");
 				count[0]++;
 				return list;
 			}
 		});
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/company/getAllCompanies")
-				.content(MasterData.asJsonString(list))
+//				.content(MasterData.asJsonString(list))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		
@@ -307,7 +307,7 @@ public class TestController {
 		Mockito.when(stockMarketService.saveStockPriceDetails(stockDto)).then(new Answer<StockPriceDetailsDTO>() {
 			@Override
 			public StockPriceDetailsDTO answer(InvocationOnMock invocation) throws Throwable {
-				System.out.println("Called");
+				System.out.println("Called : testAddStockBDD");
 				count[0]++;
 				return stockDto;
 			}
@@ -338,7 +338,7 @@ public class TestController {
         
 		Mockito.when(stockMarketService.deleteStock(companyCode)).thenReturn(stockList);
 		
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/company/deleteCompany/" + companyCode)
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/stock/deleteStock/" + companyCode)
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);				
 		
@@ -360,14 +360,14 @@ public class TestController {
 		Mockito.when(stockMarketService.deleteStock(companyCode)).then(new Answer<List<StockPriceDetailsDTO>>() {
 			@Override
 			public List<StockPriceDetailsDTO> answer(InvocationOnMock invocation) throws Throwable {
-				System.out.println("Called");
+				System.out.println("Called : testDeleteStockBDD");
 				count[0]++;
 				return stockList;
 			}
 		});
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/stock/deleteStock/" + companyCode)
-				.content(MasterData.asJsonString(stockDto))
+//				.content(MasterData.asJsonString(stockDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		
@@ -413,14 +413,14 @@ public class TestController {
 		Mockito.when(stockMarketService.getStockByCode(companyCode)).then(new Answer<List<StockPriceDetailsDTO>>() {
 			@Override
 			public List<StockPriceDetailsDTO> answer(InvocationOnMock invocation) throws Throwable {
-				System.out.println("Called");
+				System.out.println("Called : testFindStockByCompanyCodeBDD");
 				count[0]++;
 				return stockList;
 			}
 		});
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/stock/getStockByCompanyCode/" + companyCode)
-				.content(MasterData.asJsonString(stockDto))
+//				.content(MasterData.asJsonString(stockDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		
@@ -468,7 +468,7 @@ public class TestController {
 //		Mockito.when(companyService.getAllCompanies()).then(new Answer<List<StockPriceDetailsDTO>>() {
 //			@Override
 //			public List<StockPriceDetailsDTO> answer(InvocationOnMock invocation) throws Throwable {
-//				System.out.println("Called");
+//				System.out.println("Called : testFindAllStockBDD");
 //				count[0]++;
 //				return stockList;
 //			}
@@ -550,14 +550,14 @@ public class TestController {
 		Mockito.when(stockMarketService.getStockPriceIndex(companyCode, startDate, endDate)).then(new Answer<StockPriceIndexDTO>() {
 			@Override
 			public StockPriceIndexDTO answer(InvocationOnMock invocation) throws Throwable {
-				System.out.println("Called");
+				System.out.println("Called : testStockPriceIndexBDD");
 				count[0]++;
 				return stockPriceIndexDTO;
 			}
 		});
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/stock/getStockPriceIndex/"+companyCode+"/"+startDate+"/"+endDate)
-				.content(MasterData.asJsonString(stockPriceDto))
+//				.content(MasterData.asJsonString(stockPriceDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 		

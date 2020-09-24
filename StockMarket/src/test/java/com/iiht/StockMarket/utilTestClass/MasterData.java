@@ -85,13 +85,12 @@ public class MasterData
 		return stockPriceIndexDTO;
 	}
 	
-	public static Properties getProperties() throws IOException 
-	{
-		FileReader reader = new FileReader("src\\main\\resources\\application.properties");
-		Properties properties = new Properties();
-		properties.load(reader);
-		return properties;
-	}
+	/*
+	 * public static Properties getProperties() throws IOException { FileReader
+	 * reader = new FileReader("src\\main\\resources\\application.properties");
+	 * Properties properties = new Properties(); properties.load(reader); return
+	 * properties; }
+	 */
 	
 	public static String asJsonString(final Object obj) {
 	    try {
@@ -103,31 +102,30 @@ public class MasterData
 	    }
 	}
 	
-	public static LocalSessionFactoryBean getSession() throws IOException 
-	{
-		LocalSessionFactoryBean lsfb = new LocalSessionFactoryBean();
-		Properties properties = getProperties();
-		
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		
-		dataSource.setUrl(properties.getProperty("spring.datasource.url"));
-		dataSource.setUsername(properties.getProperty("spring.datasource.username"));
-		dataSource.setPassword(properties.getProperty("spring.datasource.password"));
-		
-		lsfb.setDataSource(dataSource);
-		lsfb.setPackagesToScan("com.iiht.StockMarket.model");
-		
-		properties.put("hibernate.dialect", properties.getProperty("spring.jpa.properties.hibernate.dialect"));
-		properties.put("hibernate.hbm2ddl.auto", properties.getProperty("spring.jpa.hibernate.ddl-auto"));
-		properties.put("hibernate.show_sql", properties.getProperty("spring.jpa.show-sql"));
-		
-		lsfb.setHibernateProperties(properties);
-		
-		try {
-			lsfb.afterPropertiesSet();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return lsfb;
-	}	
+	/*
+	 * public static LocalSessionFactoryBean getSession() throws IOException {
+	 * LocalSessionFactoryBean lsfb = new LocalSessionFactoryBean(); Properties
+	 * properties = getProperties();
+	 * 
+	 * DriverManagerDataSource dataSource = new DriverManagerDataSource();
+	 * 
+	 * dataSource.setUrl(properties.getProperty("spring.datasource.url"));
+	 * dataSource.setUsername(properties.getProperty("spring.datasource.username"));
+	 * dataSource.setPassword(properties.getProperty("spring.datasource.password"));
+	 * 
+	 * lsfb.setDataSource(dataSource);
+	 * lsfb.setPackagesToScan("com.iiht.StockMarket.model");
+	 * 
+	 * properties.put("hibernate.dialect",
+	 * properties.getProperty("spring.jpa.properties.hibernate.dialect"));
+	 * properties.put("hibernate.hbm2ddl.auto",
+	 * properties.getProperty("spring.jpa.hibernate.ddl-auto"));
+	 * properties.put("hibernate.show_sql",
+	 * properties.getProperty("spring.jpa.show-sql"));
+	 * 
+	 * lsfb.setHibernateProperties(properties);
+	 * 
+	 * try { lsfb.afterPropertiesSet(); } catch (IOException e) {
+	 * e.printStackTrace(); } return lsfb; }
+	 */	
 }

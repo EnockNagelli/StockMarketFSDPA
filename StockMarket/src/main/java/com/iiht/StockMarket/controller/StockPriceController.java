@@ -48,12 +48,7 @@ public class StockPriceController {
 			return new ResponseEntity<StockPriceDetailsDTO>(stockMarketService.saveStockPriceDetails(stockPriceDetailsDTO), HttpStatus.OK);
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-//	@RequestMapping(value="/getAllStock", produces = "application/json")												// 3. WORKING
-//	public ResponseEntity<List<StockPriceDetailsDTO>> getAllStockDetails() {
-//		return new ResponseEntity<List<StockPriceDetailsDTO>>(stockMarketService.getAllStockDetails(), HttpStatus.OK);
-//	}
-	//-------------------------------------------------------------------------------------------------------------------------------
-	@DeleteMapping(value = "/deleteStock/{companyCode}")																// 4. WORKING
+	@DeleteMapping(value = "/deleteStock/{companyCode}")																// 3. WORKING
 	public ResponseEntity<List<StockPriceDetailsDTO>> deleteStockByCompanyCode(@PathVariable Long companyCode) {
 
 		if(stockMarketService.deleteStock(companyCode) == null)
@@ -63,7 +58,7 @@ public class StockPriceController {
 		
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	@GetMapping(value = "/getStockByCompanyCode/{companyCode}")															// 5. WORKING
+	@GetMapping(value = "/getStockByCompanyCode/{companyCode}")															// 4. WORKING
 	public ResponseEntity<List<StockPriceDetailsDTO>> getStockByCompanyCode(@PathVariable Long companyCode) {
 		
 		if(stockMarketService.getStockByCode(companyCode) == null)
@@ -72,7 +67,7 @@ public class StockPriceController {
 			return new ResponseEntity<List<StockPriceDetailsDTO>>(stockMarketService.getStockByCode(companyCode), HttpStatus.OK);
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	@GetMapping(value = "/getStockPriceIndex/{companyCode}/{startDate}/{endDate}")										// 6. WORKING
+	@GetMapping(value = "/getStockPriceIndex/{companyCode}/{startDate}/{endDate}")										// 5. WORKING
 	public ResponseEntity<StockPriceIndexDTO> displayStockPriceIndex(@PathVariable Long companyCode, @PathVariable Date startDate, @PathVariable Date endDate) {
 		
 		if(stockMarketService.getStockPriceIndex(companyCode, startDate.toLocalDate(), endDate.toLocalDate()) == null)

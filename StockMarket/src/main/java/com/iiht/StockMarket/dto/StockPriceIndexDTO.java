@@ -12,7 +12,7 @@ public class StockPriceIndexDTO {
 	private CompanyDetailsDTO companyDto;
 
 	@NotNull
-	private List<@NotBlank StockPriceDetailsDTO> stockPriceList;
+	private List<StockPriceDetailsDTO> stockPriceList;
 
 	@NotNull
 	@Digits(integer = 10, fraction = 2,  message = "Stock Price must have precision 10 and factional part of 2 decimals")		//	@Digits(integer = 10 /*precision*/, fraction = 2 /*scale*/)

@@ -41,25 +41,26 @@ public class ExceptionTests {
 
 	@Autowired
 	private MockMvc mockMvc;
-	
+
 	@MockBean
 	private CompanyInfoService companyInfoService;
 
 	@MockBean
-	private StockMarketService stockMarketService;	
-	
+	private StockMarketService stockMarketService;
+
 	//====================================================================================================================
 	//			1. Exceptions tests regarding Company Operations
 	//====================================================================================================================	
 	@Test
 	public void testCompanyForExceptionUponAddingNewCompany() throws Exception
 	{
-		CompanyDetailsDTO companyData = MasterData.getCompanyDetailsDTO();
-	
-		Mockito.when(companyInfoService.saveCompanyDetails(MasterData.getCompanyDetailsDTO())).thenReturn(companyData);
+		CompanyDetailsDTO companyDto = MasterData.getCompanyDetailsDTO();
+		companyDto.setCompanyName(null);
+		
+		Mockito.when(companyInfoService.saveCompanyDetails(companyDto)).thenReturn(companyDto);
 				
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/company/addCompany")
-				.content(MasterData.asJsonString(MasterData.getCompanyDetailsDTO()))
+				.content(MasterData.asJsonString(companyDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 				
@@ -92,10 +93,10 @@ public class ExceptionTests {
 	{
 		CompanyDetailsDTO companyDto = MasterData.getCompanyDetailsDTO();
 
-		Mockito.when(companyInfoService.getCompanyInfoById(null)).thenReturn(companyDto);
+		Mockito.when(companyInfoService.getCompanyInfoById(2L)).thenReturn(null);
 				
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/company/getCompanyInfoByCode/"+null)
-				.content(MasterData.asJsonString(companyDto))
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/company/getCompanyInfoByCode/2")
+				//.content(MasterData.asJsonString(companyDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 				
@@ -110,10 +111,10 @@ public class ExceptionTests {
 	{
 		CompanyDetailsDTO companyDto = MasterData.getCompanyDetailsDTO();
 
-		Mockito.when(companyInfoService.deleteCompany(null)).thenReturn(companyDto);
+		Mockito.when(companyInfoService.deleteCompany(2L)).thenReturn(null);
 				
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/company/deleteCompany/"+null)
-				.content(MasterData.asJsonString(companyDto))
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/company/deleteCompany/2")
+				//.content(MasterData.asJsonString(companyDto))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 				
@@ -129,9 +130,10 @@ public class ExceptionTests {
 	@Test
 	public void testStockForExceptionUponAddingNewStock() throws Exception
 	{
-		StockPriceDetailsDTO stockDetails = MasterData.getStockPriceDetailsDTO();
+		StockPriceDetailsDTO stockDto = MasterData.getStockPriceDetailsDTO();
 
-		when(stockMarketService.saveStockPriceDetails(MasterData.getStockPriceDetailsDTO())).thenReturn(stockDetails);
+		Mockito.when(stockMarketService.saveStockPriceDetails(null)).thenReturn(stockDto);
+		//when(stockMarketService.saveStockPriceDetails(MasterData.getStockPriceDetailsDTO())).thenReturn(stockDetails);
 				
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/stock/newStock")
 				.content(MasterData.asJsonString(MasterData.getStockPriceDetailsDTO()))
@@ -171,7 +173,7 @@ public class ExceptionTests {
 		Mockito.when(stockMarketService.getStockByCode(null)).thenReturn(stockList);
 				
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/stock/getStockByCompanyCode/"+null)
-				.content(MasterData.asJsonString(stockList))
+				//.content(MasterData.asJsonString(stockList))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 				
@@ -189,7 +191,7 @@ public class ExceptionTests {
 		Mockito.when(stockMarketService.deleteStock(null)).thenReturn(stockList);
 				
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/stock/deleteStock/"+null)
-				.content(MasterData.asJsonString(stockList))
+				//.content(MasterData.asJsonString(stockList))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON);
 				

@@ -49,16 +49,6 @@ public class StockMarketServiceImpl implements StockMarketService {
 			throw new StockNotFoundException("Invalid Company Code. No Stock available against this company code.");
 	};
 	//----------------------------------------------------------------------------
-//	public List<StockPriceDetailsDTO> getAllStockDetails() {
-
-//		List<StockPriceDetails> stockDetails = stockRepository.findAll();
-		
-//		if(CollectionUtils.isEmpty(stockDetails))
-//			return null;
-//		else
-//			return stockDetails.stream().map(StockMarketUtility::convertToStockPriceDetailsDTO).collect(Collectors.toList());
-//	};
-	//----------------------------------------------------------------------------
 	public List<StockPriceDetailsDTO> getStockByCode(Long companyCode){
 
 		List<StockPriceDetails> stockDetails = stockRepository.findStockByCompanyCode(companyCode);
@@ -85,8 +75,6 @@ public class StockMarketServiceImpl implements StockMarketService {
 	
 	public StockPriceIndexDTO getStockPriceIndex(Long companyCode, LocalDate startDate, LocalDate endDate) {
 		
-		//Map<String, Object> stockPriceIndex = new TreeMap<String, Object>();
-
 		StockPriceIndexDTO stockPriceIndexDto = new StockPriceIndexDTO();
 		
 		CompanyDetails companyDetails = companyRepository.findCompanyDetailsById(companyCode);
@@ -104,19 +92,6 @@ public class StockMarketServiceImpl implements StockMarketService {
 		Double minStockPrice = getMinStockPrice(companyCode, startDate, endDate);
 		stockPriceIndexDto.setMinStockPrice(minStockPrice);
 
-		//Double currentStockPrice = stockList.get(stockList.size()-1).getCurrentStockPrice();
-
-		/*
-		 * stockPriceIndex.put("1. Stock Exchange ", company.getStockExchange());
-		 * stockPriceIndex.put("2. Company Name ", company.getCompanyName());
-		 * stockPriceIndex.put("3. Company Code ", companyCode);
-		 * stockPriceIndex.put("4. Current Stock Price ", currentStockPrice);
-		 * stockPriceIndex.put("5. From Date ", startDate);
-		 * stockPriceIndex.put("6. To Date ", endDate);
-		 * stockPriceIndex.put("7. Minimum Stock Price ", minStockPrice);
-		 * stockPriceIndex.put("8. Average Stock Price ", avgStockPrice);
-		 * stockPriceIndex.put("9. Maximum Stock Price ", maxStockPrice);
-		 */		
 		return stockPriceIndexDto;
 	};
 }

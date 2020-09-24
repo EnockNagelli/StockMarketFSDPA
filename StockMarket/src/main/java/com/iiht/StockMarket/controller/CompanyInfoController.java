@@ -33,7 +33,7 @@ public class CompanyInfoController {
 	//-------------------------------------------------------------------------------------------------------------------------------
 	// SERVICE OPERATIONS
 	//-------------------------------------------------------------------------------------------------------------------------------
-	@RequestMapping (value = "/home")																						// 1. WORKING
+	@RequestMapping (value = "/home")																					// 1. WORKING
  	public String landingPage() {
  		return "Welcome to StockMarket Application - Dealing with Stock Market Business - Companies and Stock Price Index.";
  	}
@@ -61,7 +61,7 @@ public class CompanyInfoController {
 			return new ResponseEntity<CompanyDetailsDTO>(companyInfoService.deleteCompany(companyCode), HttpStatus.OK);
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	@GetMapping(value = "/getCompanyInfoById/{companyCode}")													// 6. WORKING
+	@GetMapping(value = "/getCompanyInfoById/{companyCode}")															// 5. WORKING
 	public ResponseEntity<CompanyDetailsDTO> getCompanyDetailsById(@PathVariable("companyCode") Long companyCode) {
 		
 		if(companyInfoService.getCompanyInfoById(companyCode) == null)
@@ -70,7 +70,7 @@ public class CompanyInfoController {
 			return new ResponseEntity<CompanyDetailsDTO>(companyInfoService.getCompanyInfoById(companyCode), HttpStatus.OK);
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	@GetMapping(value = "/getAllCompanies", produces = "application/json")										// 5. WORKING
+	@GetMapping(value = "/getAllCompanies", produces = "application/json")												// 6. WORKING
 	public ResponseEntity<List<CompanyDetailsDTO>> getAllCompanies() {		
 			return new ResponseEntity<List<CompanyDetailsDTO>>(companyInfoService.getAllCompanies(), HttpStatus.OK);
 	}

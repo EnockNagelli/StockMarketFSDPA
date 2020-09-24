@@ -18,16 +18,14 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import com.iiht.StockMarket.dto.CompanyDetailsDTO;
 import com.iiht.StockMarket.dto.StockPriceDetailsDTO;
+import com.iiht.StockMarket.dto.StockPriceIndexDTO;
 import com.iiht.StockMarket.utilTestClass.MasterData;
 
-@RunWith(SpringRunner.class)
 public class BoundaryTests implements Serializable
 {
 	private static final long serialVersionUID = -6544854658457780865L;
@@ -35,7 +33,7 @@ public class BoundaryTests implements Serializable
 	private Validator validator;
 
     //----------------------------------------------------------------------------------------------
-    @Before
+    @BeforeEach
     public void setUp() {
     	ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
@@ -45,10 +43,10 @@ public class BoundaryTests implements Serializable
 	//			1. CompanyDetiails - Validating length of all properties
     //=============================================================================================
 	@Test
-	public void testCompanyCodeTitleLength() throws Exception 
+	public void testCompanyCodeLength() throws Exception 
 	{
 		CompanyDetailsDTO companyDetails = MasterData.getCompanyDetailsDTO();
-		companyDetails.setCompanyCode((long)101);
+		companyDetails.setCompanyCode(null);
 		Set<ConstraintViolation<CompanyDetailsDTO>> violations = validator.validate(companyDetails);
 		yakshaAssert(currentTest(), !violations.isEmpty()? true : false, boundaryTestFile);
 	}
@@ -66,7 +64,7 @@ public class BoundaryTests implements Serializable
 	public void testCompanyNameLength() throws Exception 
 	{
 		CompanyDetailsDTO companyDetails = MasterData.getCompanyDetailsDTO();
-		companyDetails.setCompanyName("TM");
+		companyDetails.setCompanyName("CO");
 		Set<ConstraintViolation<CompanyDetailsDTO>> violations = validator.validate(companyDetails);
 		yakshaAssert(currentTest(),!violations.isEmpty()? true : false, boundaryTestFile);
 	}
@@ -75,7 +73,7 @@ public class BoundaryTests implements Serializable
 	public void testCompanyCEOLength() throws Exception
 	{
 		CompanyDetailsDTO companyDetails = MasterData.getCompanyDetailsDTO();
-		companyDetails.setCompanyCEO("abc");
+		companyDetails.setCompanyCEO("NAV");
 		Set<ConstraintViolation<CompanyDetailsDTO>> violations = validator.validate(companyDetails);
 		yakshaAssert(currentTest(), !violations.isEmpty()? true : false, boundaryTestFile);
 	}
@@ -84,7 +82,7 @@ public class BoundaryTests implements Serializable
 	public void testTurnoverLength() throws Exception
 	{
 		CompanyDetailsDTO companyDetails = MasterData.getCompanyDetailsDTO();
-		companyDetails.setTurnover(87543989766.2334567);
+		companyDetails.setTurnover(null);
 		Set<ConstraintViolation<CompanyDetailsDTO>> violations = validator.validate(companyDetails);
 		yakshaAssert(currentTest(), !violations.isEmpty()? true : false, boundaryTestFile);
 	}	
@@ -103,7 +101,7 @@ public class BoundaryTests implements Serializable
 	public void testCompanyProfileLength() throws Exception
 	{
 		CompanyDetailsDTO companyDetails = MasterData.getCompanyDetailsDTO();
-		companyDetails.setCompanyProfile("Base location is in New York, USA");
+		companyDetails.setCompanyProfile("Ba");
 		Set<ConstraintViolation<CompanyDetailsDTO>> violations = validator.validate(companyDetails);
 		yakshaAssert(currentTest(), !violations.isEmpty() ? true : false, boundaryTestFile);
 	}
@@ -116,7 +114,7 @@ public class BoundaryTests implements Serializable
     {
     	CompanyDetailsDTO companyDetails = MasterData.getCompanyDetailsDTO();
         Set<ConstraintViolation<CompanyDetailsDTO>> violations = validator.validate(companyDetails);
-	    yakshaAssert(currentTest(), !violations.isEmpty() ? true : false, boundaryTestFile);	    
+	    yakshaAssert(currentTest(), violations.isEmpty() ? true : false, boundaryTestFile);	    
     }
     //----------------------------------------------------------------------------------------------
     @Test
@@ -134,7 +132,7 @@ public class BoundaryTests implements Serializable
 	public void testCurrentStockPriceLength() throws Exception
 	{
 		StockPriceDetailsDTO stockPrice = MasterData.getStockPriceDetailsDTO();
-		stockPrice.setCurrentStockPrice(45.67);
+		stockPrice.setCurrentStockPrice(null);
         Set<ConstraintViolation<StockPriceDetailsDTO>> violations = validator.validate(stockPrice);
 	    yakshaAssert(currentTest(), !violations.isEmpty() ? true : false, boundaryTestFile);
 	}
@@ -143,7 +141,8 @@ public class BoundaryTests implements Serializable
 	public void testStockPriceDateLength() throws Exception
 	{
 		StockPriceDetailsDTO stockPrice = MasterData.getStockPriceDetailsDTO();
-		stockPrice.setStockPriceDate(LocalDate.parse("2020-09-08"));
+		//stockPrice.setStockPriceDate(LocalDate.parse("2020-09-08"));
+		stockPrice.setStockPriceDate(null);
         Set<ConstraintViolation<StockPriceDetailsDTO>> violations = validator.validate(stockPrice);
 	    yakshaAssert(currentTest(), !violations.isEmpty() ? true : false, boundaryTestFile);
 	}
@@ -152,7 +151,8 @@ public class BoundaryTests implements Serializable
 	public void testStockPriceTimeLength() throws Exception
 	{
 		StockPriceDetailsDTO stockPrice = MasterData.getStockPriceDetailsDTO();
-		stockPrice.setStockPriceTime(LocalTime.parse("09:30:00"));
+		//stockPrice.setStockPriceTime(LocalTime.parse("09:30:00"));
+		stockPrice.setStockPriceTime(null);
         Set<ConstraintViolation<StockPriceDetailsDTO>> violations = validator.validate(stockPrice);
 	    yakshaAssert(currentTest(), !violations.isEmpty() ? true : false, boundaryTestFile);
 	}
@@ -164,7 +164,7 @@ public class BoundaryTests implements Serializable
     public void testPostStockPriceDetailsSuccess() throws IOException {
     	StockPriceDetailsDTO stockPrice = MasterData.getStockPriceDetailsDTO();
         Set<ConstraintViolation<StockPriceDetailsDTO>> violations = validator.validate(stockPrice);
-	    yakshaAssert(currentTest(), !violations.isEmpty() ? true : false, boundaryTestFile);
+	    yakshaAssert(currentTest(), violations.isEmpty() ? true : false, boundaryTestFile);
     }
     //----------------------------------------------------------------------------------------------
     @Test
@@ -174,4 +174,40 @@ public class BoundaryTests implements Serializable
     	Set<ConstraintViolation<StockPriceDetailsDTO>> violations = validator.validate(stockPrice);
 	    yakshaAssert(currentTest(), !violations.isEmpty() ? true : false, boundaryTestFile);
     }
+
+    //=============================================================================================
+	//			3. StockPriceIndexDTO - Validating length of all properties
+    //=============================================================================================
+	@Test
+	public void testStockPriceListLength() throws Exception
+	{
+		StockPriceIndexDTO stockPriceIndex = MasterData.getStockPriceIndexDTO();
+		stockPriceIndex.setStockPriceList(null);
+        Set<ConstraintViolation<StockPriceIndexDTO>> violations = validator.validate(stockPriceIndex);
+	    yakshaAssert(currentTest(), !violations.isEmpty() ? true : false, boundaryTestFile);
+	}
+	@Test
+	public void testMaxStockPriceLength() throws Exception
+	{
+		StockPriceIndexDTO stockPriceIndex = MasterData.getStockPriceIndexDTO();
+		stockPriceIndex.setMaxStockPrice(0.1234567);
+        Set<ConstraintViolation<StockPriceIndexDTO>> violations = validator.validate(stockPriceIndex);
+	    yakshaAssert(currentTest(), !violations.isEmpty() ? true : false, boundaryTestFile);
+	}
+	@Test
+	public void testAvgStockPriceLength() throws Exception
+	{
+		StockPriceIndexDTO stockPriceIndex = MasterData.getStockPriceIndexDTO();
+		stockPriceIndex.setAvgStockPrice(0.1234567);
+        Set<ConstraintViolation<StockPriceIndexDTO>> violations = validator.validate(stockPriceIndex);
+	    yakshaAssert(currentTest(), !violations.isEmpty() ? true : false, boundaryTestFile);
+	}
+	@Test
+	public void testMinStockPriceLength() throws Exception
+	{
+		StockPriceIndexDTO stockPriceIndex = MasterData.getStockPriceIndexDTO();
+		stockPriceIndex.setMinStockPrice(0.1234567);
+        Set<ConstraintViolation<StockPriceIndexDTO>> violations = validator.validate(stockPriceIndex);
+	    yakshaAssert(currentTest(), !violations.isEmpty() ? true : false, boundaryTestFile);
+	}	
 }

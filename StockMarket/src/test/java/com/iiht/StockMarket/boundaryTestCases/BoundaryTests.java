@@ -18,12 +18,20 @@ import javax.validation.ValidatorFactory;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
+//import org.junit.runner.RunWith;
+//import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.iiht.StockMarket.dto.CompanyDetailsDTO;
 import com.iiht.StockMarket.dto.StockPriceDetailsDTO;
 import com.iiht.StockMarket.dto.StockPriceIndexDTO;
 import com.iiht.StockMarket.utilTestClass.MasterData;
 
+@ExtendWith(SpringExtension.class)
+@RunWith(JUnitPlatform.class)
 public class BoundaryTests implements Serializable
 {
 	private static final long serialVersionUID = -6544854658457780865L;

@@ -1,11 +1,14 @@
 package com.iiht.StockMarket.dto;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class CompanyDetailsDTO {
 
+	// Bug creation 7:	"@Id" annotation added to 'companyCode' data member
+	@Id						
 	private Long companyCode;
 
 	@NotNull

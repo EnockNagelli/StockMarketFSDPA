@@ -10,6 +10,7 @@ public class InvalidCompanyExceptionResponse {
 	public InvalidCompanyExceptionResponse() {
 		super();
 	}
+	
 	public InvalidCompanyExceptionResponse(String message, long timeStamp, int status) {
 		super();
 		this.message = message;

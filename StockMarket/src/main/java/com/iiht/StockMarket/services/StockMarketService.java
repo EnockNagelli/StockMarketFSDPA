@@ -11,6 +11,7 @@ public interface StockMarketService
 	public StockPriceDetailsDTO saveStockPriceDetails(StockPriceDetailsDTO stockPriceDetailsDTO);
 	public List<StockPriceDetailsDTO> deleteStock(Long companyCode);
 	//----------------------------------------------------------------------------------------
+	//Bug creation 18: the return type "List<>" changed "Collection<>"  
 	public List<StockPriceDetailsDTO> getStockByCode(Long companyCode);
 	//----------------------------------------------------------------------------------------
 	public StockPriceIndexDTO getStockPriceIndex(Long companyCode, LocalDate startDate, LocalDate endDate);

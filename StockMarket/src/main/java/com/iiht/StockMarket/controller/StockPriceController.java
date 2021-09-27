@@ -35,13 +35,13 @@ public class StockPriceController {
 	// SERVICE OPERATIONS
 	//-------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping (value = "/stockPrice")																				// 1. WORKING
- 	public String homePage(){ 		
+ 	public String homePage() { 		
 		return "Welcome to StockMarket Application - Stock Price Details : About Stock Price details for a company.";
  	}
 	//-------------------------------------------------------------------------------------------------------------------------------
+	// Bug creation 5:	"InvalidStockException" exception is removed from addStockDetails method declaration
 	@PostMapping(value="/addStock")																						// 2. WORKING
-	public ResponseEntity<StockPriceDetailsDTO> addStockDetails(@Valid @RequestBody StockPriceDetailsDTO stockPriceDetailsDTO, BindingResult bindingResult) throws InvalidStockException {
-		
+	public ResponseEntity<StockPriceDetailsDTO> addStockDetails(@Valid @RequestBody StockPriceDetailsDTO stockPriceDetailsDTO, BindingResult bindingResult) {
 		if(bindingResult.hasErrors())
 			throw new InvalidStockException("Invalid Stock Details!!!");
 		else
@@ -50,7 +50,6 @@ public class StockPriceController {
 	//-------------------------------------------------------------------------------------------------------------------------------
 	@DeleteMapping(value = "/deleteStock/{companyCode}")																// 3. WORKING
 	public ResponseEntity<List<StockPriceDetailsDTO>> deleteStockByCompanyCode(@PathVariable Long companyCode) {
-
 		if(stockMarketService.deleteStock(companyCode) == null)
 			throw new StockNotFoundException("Invalid Company Code!! Please enter valid companyCode...");
 		else	
@@ -60,15 +59,15 @@ public class StockPriceController {
 	//-------------------------------------------------------------------------------------------------------------------------------
 	@GetMapping(value = "/getStockByCompanyCode/{companyCode}")															// 4. WORKING
 	public ResponseEntity<List<StockPriceDetailsDTO>> getStockByCompanyCode(@PathVariable Long companyCode) {
-		
 		if(stockMarketService.getStockByCode(companyCode) == null)
 			throw new StockNotFoundException("Invalid Company Code!! Please enter valid companyCode...");
-		else	
+		else
 			return new ResponseEntity<List<StockPriceDetailsDTO>>(stockMarketService.getStockByCode(companyCode), HttpStatus.OK);
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
+	// Bug creation 6:	"@PathVariable" annotation is removed for displayStockPriceIndex method's third argument
 	@GetMapping(value = "/getStockPriceIndex/{companyCode}/{startDate}/{endDate}")										// 5. WORKING
-	public ResponseEntity<StockPriceIndexDTO> displayStockPriceIndex(@PathVariable Long companyCode, @PathVariable Date startDate, @PathVariable Date endDate) {
+	public ResponseEntity<StockPriceIndexDTO> displayStockPriceIndex(@PathVariable Long companyCode, @PathVariable Date startDate, Date endDate) {
 		
 		if(stockMarketService.getStockPriceIndex(companyCode, startDate.toLocalDate(), endDate.toLocalDate()) == null)
 			throw new StockNotFoundException("Invalid Company Code or Date!!! Please enter valid Details...");

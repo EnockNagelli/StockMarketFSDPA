@@ -15,6 +15,7 @@ import com.iiht.StockMarket.model.CompanyDetails;
 import com.iiht.StockMarket.repository.CompanyInfoRepository;
 import com.iiht.StockMarket.utils.StockMarketUtility;
 
+//Bug creation 15:	"@Service" annotation is removed from "CompanyInfoServiceImpl" class declaration
 @Service
 @Transactional
 public class CompanyInfoServiceImpl implements CompanyInfoService {
@@ -41,7 +42,8 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 			throw new CompanyNotFoundException("No Company Found in the Database...");
 	};
 	//----------------------------------------------------------------------------
-	public CompanyDetailsDTO getCompanyInfoById(Long companyCode) {
+	//Bug creation 16:	data type for parameter companyCode changed from "Long" to "long" AND respective interface method also changed
+	public CompanyDetailsDTO getCompanyInfoById(long companyCode) {
 		
 		CompanyDetails companyInfo = repository.findCompanyDetailsById(companyCode);
 
@@ -56,6 +58,22 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 		if(CollectionUtils.isEmpty(companyInfo))
 			return null;
 		else
-			return companyInfo.stream().map(StockMarketUtility::convertToCompanyDetailsDTO).collect(Collectors.toList());
+			return companyInfo.stream().map(StockMarketUtility::convertToCompanyDetailsDTO).collect(Collectors.toCollection(null));
+			//Bug creation 17:	"Collectors.toList()" changed to "Collectors.toCollection(null)"
 	};
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

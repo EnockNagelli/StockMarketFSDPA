@@ -9,6 +9,6 @@ public interface CompanyInfoService {
 	public CompanyDetailsDTO saveCompanyDetails(CompanyDetailsDTO companyDetailsDTO);
 	public CompanyDetailsDTO deleteCompany(Long companyCode);
 	//----------------------------------------------------------------------------
-	public CompanyDetailsDTO getCompanyInfoById(Long companyCode);
+	public CompanyDetailsDTO getCompanyInfoById(long companyCode);
 	public List<CompanyDetailsDTO> getAllCompanies();
 }

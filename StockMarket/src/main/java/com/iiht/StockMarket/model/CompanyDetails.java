@@ -6,12 +6,11 @@ import java.util.Set;
 import javax.persistence.Id;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity
+// Bug creation 11:	"@Entity" annotation is removed from "CompanyDetails" class
 @Table(name="CompanyDetails")
 public class CompanyDetails implements Serializable {
 

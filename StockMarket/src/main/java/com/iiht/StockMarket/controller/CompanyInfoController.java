@@ -2,8 +2,6 @@ package com.iiht.StockMarket.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,13 +36,10 @@ public class CompanyInfoController {
  		return "Welcome to StockMarket Application - Dealing with Stock Market Business - Companies and Stock Price Index.";
  	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	@RequestMapping (value = "/company")																				// 2. WORKING
- 	public String homePage(){
- 		return "Welcome to StockMarket Application - Company Information : List companies is a Stock Exchange.";
- 	}
-	//-------------------------------------------------------------------------------------------------------------------------------
+	// Bug creation 2:	@Valid removed as parameter of addCompanyDetails method
+	// Bug creation 3:	"InvalidCompanyException" exception is removed from addCompanyDetails method declaration
 	@PostMapping(value="/addCompany")																					// 3. WORKING
-	public ResponseEntity<CompanyDetailsDTO> addCompanyDetails(@Valid @RequestBody CompanyDetailsDTO companyDetailsDTO, BindingResult bindingResult) throws InvalidCompanyException {
+	public ResponseEntity<CompanyDetailsDTO> addCompanyDetails(@RequestBody CompanyDetailsDTO companyDetailsDTO, BindingResult bindingResult) {
 
 		if(bindingResult.hasErrors())
 			throw new InvalidCompanyException("Invalid Company Details!!!");
@@ -61,8 +56,9 @@ public class CompanyInfoController {
 			return new ResponseEntity<CompanyDetailsDTO>(companyInfoService.deleteCompany(companyCode), HttpStatus.OK);
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
+	// Bug creation 4:	CompanyCode Data type "Long" changed to primitive type "long"
 	@GetMapping(value = "/getCompanyInfoById/{companyCode}")															// 5. WORKING
-	public ResponseEntity<CompanyDetailsDTO> getCompanyDetailsById(@PathVariable("companyCode") Long companyCode) {
+	public ResponseEntity<CompanyDetailsDTO> getCompanyDetailsById(@PathVariable("companyCode") long companyCode) {
 		
 		if(companyInfoService.getCompanyInfoById(companyCode) == null)
 			throw new CompanyNotFoundException("Invalid Company Code!! Please enter valid companyCode...");
@@ -72,7 +68,7 @@ public class CompanyInfoController {
 	//-------------------------------------------------------------------------------------------------------------------------------
 	@GetMapping(value = "/getAllCompanies", produces = "application/json")												// 6. WORKING
 	public ResponseEntity<List<CompanyDetailsDTO>> getAllCompanies() {		
-			return new ResponseEntity<List<CompanyDetailsDTO>>(companyInfoService.getAllCompanies(), HttpStatus.OK);
+		return new ResponseEntity<List<CompanyDetailsDTO>>(companyInfoService.getAllCompanies(), HttpStatus.OK);
 	}
 	
 	//================================================================================================
@@ -92,3 +88,65 @@ public class CompanyInfoController {
 		return response;
 	}	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+The @Controller is a common annotation that is used to mark a class as Spring MVC Controller while 
+@RestController is a special controller used in RESTFul web services and the equivalent of @Controller + @ResponseBody.
+
+The @Controller annotation indicates that the class is a "Controller" like a web controller while @RestController annotation 
+indicates that the class is a controller where @RequestMapping methods assume @ResponseBody semantics 
+by default i.e. servicing REST API.
+
+@Target(value=TYPE)
+@Retention(value=RUNTIME)
+@Documented
+@Controller
+@ResponseBody
+public @interface RestController
+
+@Target(value=TYPE)
+@Retention(value=RUNTIME)
+@Documented
+@Component
+public @interface Controller 
+ 
+@Valid, it automatically bootstraps the default JSR 380 implementation — Hibernate Validator — and validates the argument. 
+When the target argument fails to pass the validation, Spring Boot throws a MethodArgumentNotValidException exception.
+
+@RequestBody annotation maps the HttpRequest body to a transfer or domain object, enabling automatic deserialization of the 
+inbound HttpRequest body onto a Java object.
+
+@ResponseBody annotation tells a controller that the object returned is automatically serialized into JSON and 
+passed back into the HttpResponse object.
+
+@PathVariable annotation can be used to handle template variables in the request URI mapping
+
+Errors, BindingResult For access to errors from validation and data binding for a command object (that is, a @ModelAttribute argument) 
+or errors from the validation of a @RequestBody or @RequestPart arguments. You must declare an Errors, or BindingResult argument 
+immediately after the validated method argument.
+
+//-------------------------------------------------------------------------------------------------------------------------------
+@RequestMapping (value = "/company")																				// 2. WORKING
+	public String homePage(){
+		return "Welcome to StockMarket Application - Company Information : List companies is a Stock Exchange.";
+	}
+	
+*/

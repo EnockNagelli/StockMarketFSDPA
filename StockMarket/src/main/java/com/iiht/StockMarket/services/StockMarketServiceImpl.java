@@ -20,6 +20,7 @@ import com.iiht.StockMarket.repository.StockPriceRepository;
 import com.iiht.StockMarket.utils.StockMarketUtility;
 
 @Service
+//Bug creation 19: "@Transactional" annotation is removed from StockMarketServiceImpl class declaration
 @Transactional
 public class StockMarketServiceImpl implements StockMarketService {
 
@@ -83,8 +84,7 @@ public class StockMarketServiceImpl implements StockMarketService {
 		List<StockPriceDetailsDTO> stockPriceList = getStockByCode(companyCode);
 		stockPriceIndexDto.setStockPriceList(stockPriceList);
 
-		Double maxStockPrice = getMaxStockPrice(companyCode, startDate, endDate);
-		stockPriceIndexDto.setMaxStockPrice(maxStockPrice);
+		//Bug creation 20:	Removed to fetch maxStockPrice and setMaxStockPrice 
 		
 		Double avgStockPrice = getAvgStockPrice(companyCode, startDate, endDate);
 		stockPriceIndexDto.setAvgStockPrice(avgStockPrice);

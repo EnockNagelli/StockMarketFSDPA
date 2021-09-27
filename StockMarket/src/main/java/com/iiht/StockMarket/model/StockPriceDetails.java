@@ -6,8 +6,8 @@ import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Length;
@@ -20,8 +20,8 @@ public class StockPriceDetails implements Serializable {
 
 	private static final long serialVersionUID = 3721936374836041464L;
 
+	// Bug creation 12:	"@GeneratedValue(strategy=GenerationType.AUTO)" annotation is removed for "Id" data member
 	@javax.persistence.Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long Id;
 	
 	@Length(min=1, max=1000)

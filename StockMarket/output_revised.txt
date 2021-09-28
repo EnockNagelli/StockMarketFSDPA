@@ -12,5 +12,6 @@ testFindCompanyInfoByIdBDD=false
 testDeleteCompanyBDD=false
 testAddCompanyBDD=false
 testFindStockByCompanyCode=false
+testStockPriceIndex=false
 testStockPriceIndexBDD=false
 testAddCompany=false

@@ -36,8 +36,8 @@ public class CompanyInfoController {
  		return "Welcome to StockMarket Application - Dealing with Stock Market Business - Companies and Stock Price Index.";
  	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	// Bug creation 2:	@Valid removed as parameter of addCompanyDetails method
-	// Bug creation 3:	"InvalidCompanyException" exception is removed from addCompanyDetails method declaration
+	// Bug creation 1:	@Valid removed as parameter of addCompanyDetails method
+	// Bug creation 2:	"InvalidCompanyException" exception is removed from addCompanyDetails method declaration
 	@PostMapping(value="/addCompany")																					// 3. WORKING
 	public ResponseEntity<CompanyDetailsDTO> addCompanyDetails(@RequestBody CompanyDetailsDTO companyDetailsDTO, BindingResult bindingResult) {
 
@@ -56,7 +56,7 @@ public class CompanyInfoController {
 			return new ResponseEntity<CompanyDetailsDTO>(companyInfoService.deleteCompany(companyCode), HttpStatus.OK);
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	// Bug creation 4:	CompanyCode Data type "Long" changed to primitive type "long"
+	// Bug creation 3:	CompanyCode Data type "Long" changed to primitive type "long"
 	@GetMapping(value = "/getCompanyInfoById/{companyCode}")															// 5. WORKING
 	public ResponseEntity<CompanyDetailsDTO> getCompanyDetailsById(@PathVariable("companyCode") long companyCode) {
 		

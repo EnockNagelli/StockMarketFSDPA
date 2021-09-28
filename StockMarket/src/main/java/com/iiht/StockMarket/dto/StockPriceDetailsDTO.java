@@ -27,9 +27,9 @@ public class StockPriceDetailsDTO {
 	@Digits(integer = 10, fraction = 2,  message = "Stock Price must have precision 10 and factional part of 2 decimals")		//	@Digits(integer = 10 /*precision*/, fraction = 2 /*scale*/)
 	private Double currentStockPrice;
 	
-	// Bug creation 8:	"@NotNull" annotation is removed for stockPriceDate data member
+	// Bug creation 8:	"@JsonFormat(pattern="yyyy-MM-dd")" annotation is removed for stockPriceDate data member
+	@NotNull
 	@Temporal(TemporalType.DATE)
-	@JsonFormat(pattern="yyyy-MM-dd")
 	@PastOrPresent
 	private LocalDate stockPriceDate;
 	

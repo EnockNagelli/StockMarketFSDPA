@@ -16,7 +16,6 @@ import com.iiht.StockMarket.repository.CompanyInfoRepository;
 import com.iiht.StockMarket.utils.StockMarketUtility;
 
 //Bug creation 15:	"@Service" annotation is removed from "CompanyInfoServiceImpl" class declaration
-@Service
 @Transactional
 public class CompanyInfoServiceImpl implements CompanyInfoService {
 	

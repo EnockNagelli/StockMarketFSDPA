@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import com.iiht.StockMarket.model.StockPriceDetails;
 
 // Bug creation 14:	This is interface need to annotate with '@Repository'
-@Repository
 public interface StockPriceRepository extends JpaRepository<StockPriceDetails, Long> {
 	
 	@Query("select cd FROM StockPriceDetails cd WHERE cd.companyCode=?1")

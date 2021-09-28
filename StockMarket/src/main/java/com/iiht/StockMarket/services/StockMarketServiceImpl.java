@@ -21,7 +21,6 @@ import com.iiht.StockMarket.utils.StockMarketUtility;
 
 @Service
 //Bug creation 19: "@Transactional" annotation is removed from StockMarketServiceImpl class declaration
-@Transactional
 public class StockMarketServiceImpl implements StockMarketService {
 
 	@Autowired
@@ -50,7 +49,7 @@ public class StockMarketServiceImpl implements StockMarketService {
 			throw new StockNotFoundException("Invalid Company Code. No Stock available against this company code.");
 	};
 	//----------------------------------------------------------------------------
-	public List<StockPriceDetailsDTO> getStockByCode(Long companyCode){
+	public List<StockPriceDetailsDTO> getStockByCode(long companyCode){
 
 		List<StockPriceDetails> stockDetails = stockRepository.findStockByCompanyCode(companyCode);
 		
@@ -85,6 +84,8 @@ public class StockMarketServiceImpl implements StockMarketService {
 		stockPriceIndexDto.setStockPriceList(stockPriceList);
 
 		//Bug creation 20:	Removed to fetch maxStockPrice and setMaxStockPrice 
+//		Double maxStockPrice = getMaxStockPrice(companyCode, startDate, endDate);
+//		stockPriceIndexDto.setMaxStockPrice(maxStockPrice);
 		
 		Double avgStockPrice = getAvgStockPrice(companyCode, startDate, endDate);
 		stockPriceIndexDto.setAvgStockPrice(avgStockPrice);

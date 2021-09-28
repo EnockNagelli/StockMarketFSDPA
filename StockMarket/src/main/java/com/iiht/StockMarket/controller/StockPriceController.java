@@ -39,7 +39,7 @@ public class StockPriceController {
 		return "Welcome to StockMarket Application - Stock Price Details : About Stock Price details for a company.";
  	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	// Bug creation 5:	"InvalidStockException" exception is removed from addStockDetails method declaration
+	// Bug creation 4:	"InvalidStockException" exception is removed from addStockDetails method declaration
 	@PostMapping(value="/addStock")																						// 2. WORKING
 	public ResponseEntity<StockPriceDetailsDTO> addStockDetails(@Valid @RequestBody StockPriceDetailsDTO stockPriceDetailsDTO, BindingResult bindingResult) {
 		if(bindingResult.hasErrors())
@@ -57,20 +57,22 @@ public class StockPriceController {
 		
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
+	// Bug creation 5:	the else part has changed to simple return statement other than ResponseEntity
 	@GetMapping(value = "/getStockByCompanyCode/{companyCode}")															// 4. WORKING
-	public ResponseEntity<List<StockPriceDetailsDTO>> getStockByCompanyCode(@PathVariable Long companyCode) {
+	public List<StockPriceDetailsDTO> getStockByCompanyCode(@PathVariable Long companyCode) {
 		if(stockMarketService.getStockByCode(companyCode) == null)
 			throw new StockNotFoundException("Invalid Company Code!! Please enter valid companyCode...");
 		else
-			return new ResponseEntity<List<StockPriceDetailsDTO>>(stockMarketService.getStockByCode(companyCode), HttpStatus.OK);
+			return stockMarketService.getStockByCode(companyCode);
+//			return new ResponseEntity<List<StockPriceDetailsDTO>>(stockMarketService.getStockByCode(companyCode), HttpStatus.OK);
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------
-	// Bug creation 6:	"@PathVariable" annotation is removed for displayStockPriceIndex method's third argument
+	// Bug creation 6:	"StockNotFoundException" changed to "InvalidStockException"
 	@GetMapping(value = "/getStockPriceIndex/{companyCode}/{startDate}/{endDate}")										// 5. WORKING
-	public ResponseEntity<StockPriceIndexDTO> displayStockPriceIndex(@PathVariable Long companyCode, @PathVariable Date startDate, Date endDate) {
+	public ResponseEntity<StockPriceIndexDTO> displayStockPriceIndex(@PathVariable Long companyCode, @PathVariable Date startDate, @PathVariable Date endDate) {
 		
 		if(stockMarketService.getStockPriceIndex(companyCode, startDate.toLocalDate(), endDate.toLocalDate()) == null)
-			throw new StockNotFoundException("Invalid Company Code or Date!!! Please enter valid Details...");
+			throw new InvalidStockException("Invalid Company Code or Date!!! Please enter valid Details...");
 		else	
 			return new ResponseEntity<StockPriceIndexDTO>(stockMarketService.getStockPriceIndex(companyCode, startDate.toLocalDate(), endDate.toLocalDate()), HttpStatus.OK);
 	}
